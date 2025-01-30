@@ -72,7 +72,7 @@ const useCrayPay = () => {
   ) => {
     try {
       let popup = popupCenter({
-        url: origin,
+        url: origin + (testnet ? "?testnet" : ""),
         title: "Cray Pay Widget",
         w: 450,
         h: 600,
