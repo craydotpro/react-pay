@@ -1,0 +1,54 @@
+{
+  "name": "cray-pay-sdk",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "One click seamless crypto payments",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rimraf dist && npx rollup -c && tsc --emitDeclarationOnly",
+    "tsc": "rimraf dist && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craynetwork/pay-widget-sdk.git"
+  },
+  "keywords": [
+    "sdk",
+    "payments",
+    "blockchain",
+    "chain-abstraction",
+    "stablecoin"
+  ],
+  "author": "cray.network",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/craynetwork/pay-widget-sdk/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^4.32.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
+  },
+  "dependencies": {
+    "redaxios": "^0.5.1",
+    "widget-bridge": "^1.0.4"
+  },
+  "homepage": "https://github.com/craynetwork/pay-widget-sdk#readme"
+}
