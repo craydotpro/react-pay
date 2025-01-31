@@ -71,8 +71,13 @@ const useCrayPay = () => {
     }
   ) => {
     try {
+      const urlParams = new URLSearchParams({
+        ...(testnet && { testnet: true }),
+        apiKey,
+        origin: window.location.origin,
+      } as any);
       let popup = popupCenter({
-        url: origin + (testnet ? "?testnet" : ""),
+        url: origin + "?" + urlParams,
         title: "Cray Pay Widget",
         w: 450,
         h: 600,
@@ -84,7 +89,6 @@ const useCrayPay = () => {
       setStatus(IPaymentStatus.initiated);
       nativeBridge.UpdateChannel(popup);
       await waitTillInitialization(() => states.current.isPopupWindowConnected);
-
       nativeBridge.Send("APP_DATA", {
         apiKey,
         destinationToken,
