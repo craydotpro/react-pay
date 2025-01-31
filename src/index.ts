@@ -57,6 +57,7 @@ const useCrayPay = () => {
       testnet = false,
       destinationChain,
       amount,
+      action = null,
     }: {
       destinationToken: string;
       receiverAddress: string;
@@ -64,6 +65,10 @@ const useCrayPay = () => {
       testnet?: boolean;
       amount: string;
       destinationChain: number;
+      action?: {
+        payload: string;
+        gasLimit: string;
+      } | null;
     },
     options?: {
       onSuccess?: (event: IPaymentRes) => any;
@@ -106,7 +111,7 @@ const useCrayPay = () => {
             receiverAddress,
             orderType: "dapp",
             destinationChain,
-            action: null,
+            action,
           },
         },
         istestnet: testnet,
