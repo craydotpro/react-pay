@@ -10,6 +10,9 @@
     "tsc": "rimraf dist && tsc",
     "prepublishOnly": "npm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md"
