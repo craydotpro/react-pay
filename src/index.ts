@@ -1,3 +1,12 @@
+/**
+ * useCrayPay - A React hook for integrating cray.network crypto payments.
+ *
+ * This hook provides a simplified interface for initiating and managing crypto payments
+ * through the CrayPay widget. It handles communication with the widget, manages payment
+ * status, and provides callbacks for success and error scenarios.
+ *
+ * @returns {object} An object containing the `pay` function and the `status` state.
+ */
 import { useEffect, useRef, useState } from "react";
 import { popupCenter } from "./window_popup";
 import { payWidgetService } from "./service";
@@ -6,6 +15,7 @@ import { _sleep, waitTillInitialization } from "./utils";
 import widgetBridge from "widget-bridge";
 import { IPaymentStatus, IPaymentRes } from "./types";
 const origin = "https://pay.cray.network";
+
 const nativeBridge = new widgetBridge({
   origin: origin,
 });
@@ -49,6 +59,27 @@ const useCrayPay = () => {
     return () => clearInterval(interval);
   }, [popup]);
 
+  /**
+   * pay - Initiates a crypto payment.
+   *
+   * Opens the CrayPay widget in a popup, sends payment information, and monitors the payment status.
+   *
+   * @param {object} paymentDetails - The details of the payment.
+   * @param {string} paymentDetails.destinationToken - The address of the token to be sent.
+   * @param {string} paymentDetails.receiverAddress - The address of the recipient.
+   * @param {string} paymentDetails.apiKey - Your CrayPay API key.
+   * @param {boolean} [paymentDetails.testnet=false] - Whether to use the testnet.
+   * @param {string} paymentDetails.amount - The amount to be paid (as a string).
+   * @param {number} paymentDetails.destinationChain - The ID of the destination chain.
+   * @param {object} [paymentDetails.action=null] - Optional action details (e.g., for contract calls).
+   * @param {string} paymentDetails.action.payload - The payload for the action.
+   * @param {string} paymentDetails.action.gasLimit - The gas limit for the action.
+   * @param {object} [options] - Optional callbacks for success and error.
+   * @param {function} [options.onSuccess] - Callback function called when the payment is successful. Receives the payment response as an argument.
+   * @param {function} [options.onError] - Callback function called when the payment fails. Receives the error as an argument.
+   *
+   * @returns {Promise<void>}
+   */
   const pay = async (
     {
       destinationToken,
