@@ -1,5 +1,5 @@
 {
-  "name": "cray-pay-sdk",
+  "name": "@craynetwork/react-pay",
   "type": "module",
   "version": "1.0.0",
   "description": "One click seamless crypto payments",
@@ -10,6 +10,10 @@
     "tsc": "rimraf dist && tsc",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/craynetwork/pay-widget-sdk.git"
