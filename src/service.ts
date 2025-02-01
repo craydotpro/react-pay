@@ -1,44 +1,39 @@
 import axios from "redaxios";
-const GATEWAY_HOST = {
-  testnet: "https://dev-api.cray.network/api",
-  mainnet: "https://dev.cray.network/api",
-};
 
+const GATEWAY_HOST = "https://dev-api.cray.network/api";
 class PayWidgetService {
   Status = async ({
     orderId,
     apiKey,
-    istestnet,
+    testnet,
   }: {
     orderId: string;
     apiKey: string;
-    istestnet: any;
+    testnet: any;
   }) => {
-    const host = istestnet ? GATEWAY_HOST.testnet : GATEWAY_HOST.mainnet;
     return (
-      await axios.get(`${host}/order-status-by-order-id/${orderId}`, {
+      await axios.get(`${GATEWAY_HOST}/order-status-by-order-id/${orderId}`, {
         headers: {
           apiKey,
-          istestnet,
+          testnet,
         },
       })
     ).data.result;
   };
   Create = async ({
     data,
-    istestnet,
+    testnet,
     apiKey,
   }: {
     data: any;
-    istestnet: any;
+    testnet: any;
     apiKey: string;
   }) => {
-    const host = istestnet ? GATEWAY_HOST.testnet : GATEWAY_HOST.mainnet;
     return (
-      await axios.post(`${host}/create-order`, data, {
+      await axios.post(`${GATEWAY_HOST}/create-order`, data, {
         headers: {
           apiKey,
-          istestnet,
+          testnet,
         },
       })
     ).data.result;

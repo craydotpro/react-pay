@@ -66,8 +66,9 @@ const useCrayPay = () => {
       amount: string;
       destinationChain: number;
       action?: {
-        payload: string;
-        gasLimit: string;
+        abi: any;
+        functionName: string;
+        args: any[];
       } | null;
     },
     options?: {
@@ -101,6 +102,7 @@ const useCrayPay = () => {
         testnet,
         destinationChain,
         amount,
+        action,
       });
 
       const order = await payWidgetService.Create({
@@ -111,10 +113,9 @@ const useCrayPay = () => {
             receiverAddress,
             orderType: "dapp",
             destinationChain,
-            action,
           },
         },
-        istestnet: testnet,
+        testnet,
         apiKey,
       });
 
@@ -129,7 +130,7 @@ const useCrayPay = () => {
           const order = await payWidgetService.Status({
             orderId: res._id,
             apiKey,
-            istestnet: testnet,
+            testnet,
           });
           if (order.status === "FULFILLED") {
             fetchStatus = false;
