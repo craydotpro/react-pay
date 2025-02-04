@@ -33,6 +33,7 @@ const useCrayPay = () => {
       const { payload, key } = data;
       switch (key) {
         case "INIT":
+        case "INVALID_API_KEY":
           states.current.isPopupWindowConnected = true;
           break;
       }
@@ -88,7 +89,7 @@ const useCrayPay = () => {
       testnet = false,
       destinationChain,
       amount,
-      action = null,
+      action,
     }: {
       destinationToken: string;
       receiverAddress: string;
@@ -97,10 +98,13 @@ const useCrayPay = () => {
       amount: string;
       destinationChain: number;
       action?: {
-        abi: any;
-        functionName: string;
-        args: any[];
-      } | null;
+        payload: {
+          abi: any;
+          functionName: string;
+          args: any[];
+        } | null;
+        gasLimit: number; // The maximum gas limit for the action on the destination chain.
+      };
     },
     options?: {
       onSuccess?: (event: IPaymentRes) => any;
@@ -122,9 +126,9 @@ const useCrayPay = () => {
       if (!popup) {
         alert("Enable popup and try again");
       }
+      nativeBridge.UpdateChannel(popup);
       setPopup(popup);
       setStatus(IPaymentStatus.initiated);
-      nativeBridge.UpdateChannel(popup);
       await waitTillInitialization(() => states.current.isPopupWindowConnected);
       nativeBridge.Send("APP_DATA", {
         apiKey,
