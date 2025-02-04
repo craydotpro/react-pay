@@ -196,8 +196,8 @@ const handlePayment = () =>
         functionName: "mint",
         args: ["$$senderAddress"],
         /**
-         * you can access variables by added `$$`
-         * i.e. $$destinationChain, $$receiverAddress, $$senderAddress
+         * you can access senderAddress by `$$senderAddress` variable
+         *
          */
       },
     },

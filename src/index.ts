@@ -111,6 +111,16 @@ const useCrayPay = () => {
       onError?: (error: any) => any;
     }
   ) => {
+    if (action) {
+      let serializedAction = JSON.stringify(action);
+      serializedAction = serializedAction.replaceAll(
+        "$$senderAddress",
+        "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      );
+      // replace $$senderAddress with placeholder addrss
+      action = JSON.parse(serializedAction);
+    }
+
     try {
       const urlParams = new URLSearchParams({
         ...(testnet && { testnet: true }),
@@ -137,7 +147,6 @@ const useCrayPay = () => {
         testnet,
         destinationChain,
         amount,
-        action,
       });
 
       const order = await payWidgetService.Create({
@@ -148,6 +157,7 @@ const useCrayPay = () => {
             receiverAddress,
             orderType: "dapp",
             destinationChain,
+            action,
           },
         },
         testnet,
