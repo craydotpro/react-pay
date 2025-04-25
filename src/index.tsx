@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import PayWidget from "./widget";
 import CrayProvider from "./providers";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -13,6 +13,7 @@ const CrayPayButton = ({
   onPaymentStarted = () => {},
   onPaymentCompleted = () => {},
   onPaymentFailed = () => {},
+  children,
 }: {
   apiKey: string;
   testnet: boolean;
@@ -20,6 +21,7 @@ const CrayPayButton = ({
   onPaymentStarted?: (params: IOrder) => any;
   onPaymentCompleted?: (params: IOrder) => any;
   onPaymentFailed?: (params: IOrder) => any;
+  children?: ReactElement;
 }) => {
   (window as any).onPaymentStarted = onPaymentStarted;
 
@@ -59,6 +61,7 @@ const CrayPayButton = ({
             onPaymentStarted={onPaymentStarted}
             onPaymentCompleted={onPaymentCompleted}
             onPaymentFailed={onPaymentFailed}
+            children={children}
           />
         </AppKitProviderWrapper>
       </QueryClientProvider>

@@ -45,7 +45,7 @@ const PaymentSuccess = () => {
             onClick={() => setExpandReceivedTokens(!expandReceivedTokens)}
             className="flex items-center gap-[10px] cursor-pointer"
           >
-            <SuccessIcon size="20" className="z-1" />
+            <SuccessIcon size="20" className="z-[1]" />
             <span className="cray-label-lg text-slate-500 flex items-center gap-1">
               Received
               {inputOrders.length === 1 ? (
@@ -85,7 +85,7 @@ const PaymentSuccess = () => {
             ))}
           </div>
           <div className="flex items-center gap-[10px]">
-            <SuccessIcon size="20" className="z-1" />
+            <SuccessIcon size="20" className="z-[1]" />
             <span className="cray-label-lg text-slate-500">
               Paid in {outputChain.name} {destinationToken.symbol}
             </span>
