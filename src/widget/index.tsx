@@ -1,11 +1,20 @@
 import css from "../style.css";
 import typography from "../styles/typography.css";
 import PayModal from "./steps/modal";
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, ReactNode, useContext, useEffect } from "react";
 import { CrayContext } from "../providers";
 import { IPaymentStatus } from "../types";
 import Button from "../ui/button";
 import { ICrayPayload, IOrder } from "../interface";
+import ReactDOM from "react-dom";
+let crayModal = document.getElementById("cray-modal")?.shadowRoot;
+if (!crayModal) {
+  const container = document.createElement("div");
+  container.setAttribute("id", "cray-modal");
+  document.body.appendChild(container);
+  container.attachShadow({ mode: "open" });
+  crayModal = container.shadowRoot;
+}
 const CloseIcon = () => {
   const { setState } = useContext(CrayContext);
   const handleClose = () => {
@@ -27,6 +36,19 @@ const CloseIcon = () => {
       </svg>
     </button>
   );
+};
+const Portal = ({
+  children,
+  portalTarget,
+}: {
+  children: ReactNode;
+  portalTarget: ShadowRoot;
+}) => {
+  if (portalTarget) {
+    return ReactDOM.createPortal(children, portalTarget);
+  } else {
+    return children;
+  }
 };
 const PayWidget = ({
   payload,
@@ -88,7 +110,7 @@ const PayWidget = ({
       );
     default:
       return (
-        <>
+        <Portal portalTarget={crayModal!}>
           <style>{css}</style>
           <style>{typography}</style>
           <div className="bg-black/50 fixed !z-[999999] top-0 left-0 w-screen h-screen flex items-center justify-center">
@@ -97,7 +119,7 @@ const PayWidget = ({
               <PayModal apiKey={apiKey} testnet={testnet} payload={payload} />
             </div>
           </div>
-        </>
+        </Portal>
       );
   }
 };
