@@ -7,6 +7,7 @@ import postcss from "rollup-plugin-postcss";
 import tailwindcss from "tailwindcss";
 import tailwindConfig from "./tailwind.config.cjs";
 import commonjs from "@rollup/plugin-commonjs";
+import dotenv from "rollup-plugin-dotenv";
 export default [
   {
     input: "./src/index.tsx",
@@ -22,6 +23,7 @@ export default [
       },
     ],
     plugins: [
+      dotenv(),
       commonjs(),
       postcss({
         config: {

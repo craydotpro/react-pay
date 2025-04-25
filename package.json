@@ -67,6 +67,7 @@
     "postcss": "^8.4.14",
     "react-shadow": "^20.6.0",
     "redaxios": "^0.5.1",
+    "rollup-plugin-dotenv": "^0.5.1",
     "rollup-plugin-postcss": "^4.0.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^3.1.3",
