@@ -1,6 +1,6 @@
 import axios from "redaxios";
 
-const GATEWAY_HOST = "http://localhost:4000/api"; //"https://dev-api.cray.network/api";
+const GATEWAY_HOST = process.env.GATEWAY_HOST;
 class PayWidgetService {
   Status = async ({
     orderId,
