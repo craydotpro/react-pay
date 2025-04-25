@@ -34,7 +34,7 @@ export interface ICrayPayload {
   amount: string;
   destinationToken: string;
   receiverAddress: string;
-  orderType: string;
+  orderType?: string;
   destinationChain: number;
   action: {
     payload: {

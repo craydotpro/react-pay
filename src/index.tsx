@@ -1,26 +1,10 @@
-interface IPayload {
-  destinationToken: string;
-  receiverAddress: string;
-  apiKey: string;
-  testnet?: boolean;
-  amount: string;
-  destinationChain: number;
-  action?: {
-    payload: {
-      abi: any;
-      functionName: string;
-      args: any[];
-    } | null;
-    gasLimit: number; // The maximum gas limit for the action on the destination chain.
-  };
-}
 import { useMemo } from "react";
 import PayWidget from "./widget";
 import CrayProvider from "./providers";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AppKitProviderWrapper } from "./config/wagmi_adopter";
 import { queryClient } from "./constants";
-import { IOrder } from "./interface";
+import { ICrayPayload, IOrder } from "./interface";
 
 const CrayPayButton = ({
   apiKey,
@@ -32,10 +16,10 @@ const CrayPayButton = ({
 }: {
   apiKey: string;
   testnet: boolean;
-  payload: IPayload;
-  onPaymentStarted: (params: IOrder) => any;
-  onPaymentCompleted: (params: IOrder) => any;
-  onPaymentFailed: (params: IOrder) => any;
+  payload: ICrayPayload;
+  onPaymentStarted?: (params: IOrder) => any;
+  onPaymentCompleted?: (params: IOrder) => any;
+  onPaymentFailed?: (params: IOrder) => any;
 }) => {
   (window as any).onPaymentStarted = onPaymentStarted;
 
