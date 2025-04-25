@@ -64,7 +64,7 @@ const PayModal = ({ payload, apiKey, testnet }: any) => {
   return (
     <div className=" flex flex-col h-full">
       {!isConnected ? (
-        <ConnectWallet order={{}} />
+        <ConnectWallet />
       ) : (
         <Stepper stepData={stepperContext}>
           <Stepper.Step>

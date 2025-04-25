@@ -15,12 +15,12 @@ const Chip = ({ chain, token }: { chain: number; token: ISpendBalance }) => {
           className="w-[14px] h-[14px] absolute left-[13px] top-[13px]"
         />
       </div>
-      <span className="label-md text-slate-600 font-medium">
+      <span className="cray-label-md text-slate-600 font-medium">
         {token?.symbol}
       </span>
       <span
         {...SHOW(!!token?.spend)}
-        className="label-md text-[#0E121B] border-slate-300 border-l pl-[10px]"
+        className="cray-label-md text-[#0E121B] border-slate-300 border-l pl-[10px]"
       >
         ${formatUnits(BigInt(token?.spend || 0), token?.decimals || 0)}
       </span>

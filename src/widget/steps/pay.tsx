@@ -115,30 +115,30 @@ const PayScreen = () => {
   return (
     <div className="h-full">
       <div className="h-1/3 bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">
-        <span className="text-[#667085] font-medium label-md">
+        <span className="text-[#667085] font-medium cray-label-md">
           Request Amount
         </span>
-        <h3>${order?.amount}</h3>
+        <h3 className="cray-h3">${order?.amount}</h3>
       </div>
       <div className="p-5 flex flex-col gap-5">
-        <div className="flex flex-col divide-y divide-[#F2F4F7] font-medium label-md">
+        <div className="flex flex-col divide-y divide-[#F2F4F7] font-medium cray-label-md">
           <div className="py-[14px] flex justify-between">
             <span className="flex items-center gap-[6px] text-slate-500 ">
               <Hourglass03 width={16} /> Estimated Time
             </span>
-            <span className=" label-md font-bold">~15sec</span>
+            <span className=" cray-label-md font-bold">~15sec</span>
           </div>
           <div className="py-[14px] flex justify-between">
             <span className="flex items-center gap-[6px] text-slate-500">
               <BankNote01 width={16} /> Platform Fee
             </span>
-            <span className=" label-md font-bold">Free</span>
+            <span className=" cray-label-md font-bold">Free</span>
           </div>
           <div className="py-[14px] flex justify-between">
             <span className="flex items-center gap-[6px] text-slate-500">
               <Wallet03 width={16} /> Wallet Info
             </span>
-            <span className=" label-md font-bold">
+            <span className=" cray-label-md font-bold">
               {prettifyAddress(senderAddress)}
             </span>
           </div>

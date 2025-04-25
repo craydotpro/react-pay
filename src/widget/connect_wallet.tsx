@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import Button from "../ui/button";
 import { _sleep } from "../utils";
 import { useAppKit } from "@reown/appkit/react";
+import { CrayContext } from "../providers";
 
-const ConnectWallet = ({ order }: { order: Record<string, string> }) => {
+const ConnectWallet = () => {
+  const {
+    state: { order },
+  } = useContext(CrayContext);
   const { open } = useAppKit();
 
   return (
@@ -28,14 +33,14 @@ const ConnectWallet = ({ order }: { order: Record<string, string> }) => {
         </svg>
         <div className="w-[88px] h-[88px] border-[1.22px] border-[#EAECF0] rounded-[14.67px] p-[4.89px] shadow-[0px_1.98px_4.89px_0px_#1D29390D] bg-white">
           <div className="w-full h-full border-[1.22px] border-[#EAECF0] rounded-[10px] flex items-center justify-center ">
-            <img src="/logo.svg" />
+            <img src="https://pay.cray.network/logo.svg" />
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center  h-1/2 gap-6 py-8">
         <div className="flex flex-col gap-2">
           <p className=" text-[28px] font-bold">
-            ${order.amount} Requested Payment
+            ${order?.amount} Requested Payment
           </p>
           <p className=" text-slate-600 text-lg font-medium">
             Please connect your wallet to continue

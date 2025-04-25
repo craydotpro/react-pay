@@ -35,7 +35,9 @@ const PaymentSuccess = () => {
       <div className="h-full">
         <div className=" bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">
           <SuccessIcon />
-          <h6>${order?.amount} USDC Payment Successfully</h6>
+          <h6 className=" cray-h6">
+            ${order?.amount} USDC Payment Successfully
+          </h6>
         </div>
         <div className="p-5 flex flex-col gap-[26px] relative">
           <div className="absolute top-1/2 -translate-y-1/2 w-[2px] h-[calc(100%-50px)] bg-[#1DAF61] left-[29px] z-[0]"></div>
@@ -44,7 +46,7 @@ const PaymentSuccess = () => {
             className="flex items-center gap-[10px] cursor-pointer"
           >
             <SuccessIcon size="20" className="z-1" />
-            <span className="label-lg text-slate-500 flex items-center gap-1">
+            <span className="cray-label-lg text-slate-500 flex items-center gap-1">
               Received
               {inputOrders.length === 1 ? (
                 <span>
@@ -84,7 +86,7 @@ const PaymentSuccess = () => {
           </div>
           <div className="flex items-center gap-[10px]">
             <SuccessIcon size="20" className="z-1" />
-            <span className="label-lg text-slate-500">
+            <span className="cray-label-lg text-slate-500">
               Paid in {outputChain.name} {destinationToken.symbol}
             </span>
           </div>

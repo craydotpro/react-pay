@@ -29,7 +29,7 @@ const PaymentError = () => {
           />
         </svg>
         <div className="flex flex-col gap-[6px] text-center max-w-[406px]">
-          <h6 className="text-[#1D2939]">Payment Failed</h6>
+          <h6 className="text-[#1D2939] cray-h6">Payment Failed</h6>
           <span className="text-center text-slate-600">
             Sorry, your payment was not successful. Please try again or you can
             request a bug 👇🏻

@@ -61,7 +61,9 @@ const SelectTokens = ({
         >
           <ArrowLeft width={24} />
         </Button>
-        <p className="text-center flex-grow label-md font-bold">Select Token</p>
+        <p className="text-center flex-grow cray-label-md font-bold">
+          Select Token
+        </p>
       </div>
       <div className="flex flex-col">
         {userBalance?.map((balance: IAccountBalance) => {
@@ -87,8 +89,10 @@ const SelectTokens = ({
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="label-md font-bold">{balance.symbol}</span>
-                  <span className="label-md text-slate-500 ">
+                  <span className="cray-label-md font-bold">
+                    {balance.symbol}
+                  </span>
+                  <span className="cray-label-md text-slate-500 ">
                     {balance.symbol}
                   </span>
                 </div>
@@ -105,7 +109,7 @@ const SelectTokens = ({
       </div>
       <div className="w-full flex-grow"></div>
       <div
-        className={` border-error bg-red-50 rounded-[8px] text-center mt-5 text-error label-md font-medium transition-all duration-200 mx-5 ${
+        className={` border-error bg-red-50 rounded-[8px] text-center mt-5 text-error cray-label-md font-medium transition-all duration-200 mx-5 ${
           isEnoughBalance
             ? "h-0 overflow-hidden p-0"
             : "max-h-[100px] p-3 border "

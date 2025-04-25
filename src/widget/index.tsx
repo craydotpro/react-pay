@@ -1,4 +1,5 @@
 import css from "../style.css";
+import typography from "../styles/typography.css";
 import PayModal from "./steps/modal";
 import { useContext, useEffect } from "react";
 import { CrayContext } from "../providers";
@@ -49,6 +50,7 @@ const PayWidget = ({
       return (
         <>
           <style>{css}</style>
+          <style>{typography}</style>
           <div className="bg-black/50 fixed !z-[999999] top-0 left-0 w-screen h-screen flex items-center justify-center">
             <div className="relative  overflow-hidden w-full md:w-[480px] h-full md:h-auto mx-auto  shadow-sm bg-white rounded-[16px]">
               <PayModal apiKey={apiKey} testnet={testnet} payload={payload} />

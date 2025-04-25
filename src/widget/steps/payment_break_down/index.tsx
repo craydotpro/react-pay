@@ -59,14 +59,14 @@ const PaymentBreakdown = () => {
   return (
     <div className="h-full">
       <div className=" bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">
-        <span className="text-[#667085] font-medium label-md">
+        <span className="text-[#667085] font-medium cray-label-md">
           Request Amount
         </span>
-        <h3>${order?.amount}</h3>
+        <h3 className="cray-h3">${order?.amount}</h3>
       </div>
       <div className="p-5 flex flex-col">
         <div className="bg-[#F8F9FC]  rounded-[12px] border border-slate-200">
-          <div className="flex justify-between text-[#667085] label-md border-b py-3 px-4">
+          <div className="flex justify-between text-[#667085] cray-label-md border-b py-3 px-4">
             <span>Token Breakdown</span>
             <span className="flex items-center gap-[6px]">
               <Wallet03 width={16} className=" text-slate-500" />
@@ -79,18 +79,18 @@ const PaymentBreakdown = () => {
             ))}
             <button
               onClick={() => setShowSelectTokens(!showSelectTokens)}
-              className="m-1 py-1 px-[10px] label-md bg-primary text-secondary rounded-[16px] cursor-pointer"
+              className="m-1 py-1 px-[10px] cray-label-md bg-primary rounded-[16px] cursor-pointer bg-black text-white"
             >
               Edit Token
             </button>
           </div>
         </div>
-        <span className="label-md mt-[14px]">
+        <span className="cray-label-md mt-[14px]">
           NOTE: Add note here Add note here Add note here Add note here Add note
           here Add note here Add note here
         </span>
         <div
-          className={` border-error bg-red-50 rounded-[8px] text-center mt-5 text-error label-md font-medium transition-all duration-200 ${
+          className={` border-error bg-red-50 rounded-[8px] text-center mt-5 text-error cray-label-md font-medium transition-all duration-200 ${
             isEnoughBalance || isLoading
               ? "h-0 overflow-hidden p-0"
               : "max-h-[100px] p-3 border "
