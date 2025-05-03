@@ -23,8 +23,6 @@ const CrayPayButton = ({
   onPaymentFailed?: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
-  (window as any).onPaymentStarted = onPaymentStarted;
-
   const {
     destinationToken,
     receiverAddress,

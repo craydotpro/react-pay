@@ -15,13 +15,6 @@ export const SHOW = (condition?: boolean) => ({
 export const _sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(() => resolve(true), ms));
 
-export const pageAccessedByReload =
-  (window.performance.navigation && window.performance.navigation.type === 1) ||
-  window.performance
-    .getEntriesByType("navigation")
-    .map((nav: any) => nav.type)
-    .includes("reload");
-
 export const deserializeFunctionData = (
   action: any,
   options: Record<string, string | number>
