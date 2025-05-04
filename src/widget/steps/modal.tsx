@@ -57,10 +57,10 @@ const PayModal = ({ payload, apiKey, testnet }: any) => {
       }
     })();
   }, []);
-  if (error) return error;
-  else if (loading) return <SuspenceLoader />;
+  if (loading) return <SuspenceLoader />;
   else if (status === IPaymentStatus.completed) return <PaymentSuccess />;
-  else if (status === IPaymentStatus.failed) return <PaymentError />;
+  else if (status === IPaymentStatus.failed || error)
+    return <PaymentError error={error} />;
   return (
     <div className=" flex flex-col h-full">
       {!isConnected ? (

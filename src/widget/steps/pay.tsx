@@ -33,7 +33,6 @@ const PayScreen = () => {
     mutationFn: async () => {
       let updatedOrder;
       try {
-        onPaymentStarted(order!);
         let orderRes = await payWidgetService.SetOrderPayee({
           orderHash: order?.orderId!,
           data: {
@@ -74,6 +73,7 @@ const PayScreen = () => {
         const signedOrder = await signMessageAsync({
           message: { raw: updatedOrder.orderHash },
         });
+
         let res = await payWidgetService.SubmitOrder({
           orderHash: updatedOrder.orderHash,
           data: {
@@ -86,6 +86,7 @@ const PayScreen = () => {
           apikey: apiKey,
           testnet: testnet,
         });
+        onPaymentStarted(res.data.result);
         setState((state) => ({
           ...state,
           order: res.data.result,
