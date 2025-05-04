@@ -1,6 +1,6 @@
 # @craynetwork/react-pay React Library Documentation
 
-The `useCrayPay` React hook is a powerful and easy-to-use library for integrating cryptocurrency payments into your React application. It provides a seamless way to initiate, process, and handle cryptocurrency payments using the `cray.network` . This documentation will guide you through the installation, usage, and customization of the `useCrayPay` hook.
+The `CrayPayButton` is a powerful and easy-to-use library for integrating cryptocurrency payments into your React application. It provides a seamless way to initiate, process, and handle cryptocurrency payments using the `cray.network` . This documentation will guide you through the installation, usage, and customization of the `CrayPayButton`.
 
 ---
 
@@ -10,10 +10,13 @@ The `useCrayPay` React hook is a powerful and easy-to-use library for integratin
 npm install @craynetwork/react-pay
 ```
 
-Then, import the `useCrayPay` hook into your React component:
+Then, import the `CrayPayButton` into your React component:
 
 ```javascript
-import useCrayPay from "@craynetwork/react-pay";
+import CrayPayButton from "@craynetwork/react-pay";
+/** For Nextjs
+ const CrayPayButton = dynamic(() => import("@craynetwork/react-pay"), { ssr: false });
+*/
 ```
 
 ---
@@ -22,29 +25,30 @@ import useCrayPay from "@craynetwork/react-pay";
 
 ### Basic Usage
 
-Here’s a simple example of how to use the `useCrayPay` hook to initiate a payment:
+Here’s a simple example of how to use the `CrayPayButton` to initiate a payment:
 
 ```javascript
 import React from "react";
-import useCrayPay from "@craynetwork/react-pay";
-
+import CrayPayButton from "@craynetwork/react-pay";
+/** For Nextjs
+ const CrayPayButton = dynamic(() => import("@craynetwork/react-pay"), { ssr: false });
+*/
 const PaymentComponent = () => {
-  const { pay, status } = useCrayPay();
-
-  const handlePayment = () =>
-    pay({
-      destinationToken: "0xTokenAddress",
-      receiverAddress: "0xReceiverAddress",
-      apiKey: "your-api-key",
-      testnet: true,
-      destinationChain: 1,
-      amount: "100",
-    });
-
   return (
     <div>
-      <button onClick={handlePayment}>Pay with Crypto</button>
-      <p>Payment Status: {status}</p>
+      <CrayPayButton
+        testnet={true}
+        apiKey={API_KEY}
+        onPaymentStarted={(e) => console.log("paymentStarted", e)}
+        onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
+        onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        payload={{
+          destinationToken: "0xTokenAddress",
+          receiverAddress: "0xReceiverAddress",
+          destinationChain: 1,
+          amount: "100",
+        }}
+      />
     </div>
   );
 };
@@ -52,97 +56,91 @@ const PaymentComponent = () => {
 export default PaymentComponent;
 ```
 
-### Advanced Usage
-
-You can also handle success and error events using the `onSuccess` and `onError` callbacks:
-
-```javascript
-const handlePayment = () =>
-  pay(
-    {
-      destinationToken: "0xTokenAddress",
-      receiverAddress: "0xReceiverAddress",
-      apiKey: "your-api-key",
-      testnet: true,
-      destinationChain: 1,
-      amount: "1.5",
-    },
-    {
-      onSuccess: (event) => {
-        console.log("Payment successful:", event);
-      },
-      onError: (error) => {
-        console.error("Payment failed:", error);
-      },
-    }
-  );
-```
-
 ---
 
 ## API Reference
 
-### `useCrayPay` Hook
+### `CrayPayButton`
 
-The `useCrayPay` hook returns an object with the following properties:
+It accepts These arguments:
 
-- **`pay`**: A function to initiate the payment process.
-- **`status`**: A state variable that tracks the current status of the payment.
-
-### `pay` Function
-
-The `pay` function is used to initiate a payment. It accepts two arguments:
-
-1. **Payment Configuration Object**:
-
-   - `destinationToken` (string): Token address of the token to be used for payment.
-   - `receiverAddress` (string): The wallet address of the receiver.
-   - `apiKey` (string): Your API key for authentication.
-   - `testnet` (boolean, optional): Whether to use the testnet. Default is `false`.
-   - `destinationChain` (number): The chain ID of the destination blockchain.
-   - `amount` (string): The amount to be paid in USD.
-   - `action` (object, optional): An object containing `payload` and `gasLimit` for custom actions.
-
-2. **Options Object** (optional):
-   - `onSuccess` (function): Callback function triggered on successful payment.
-   - `onError` (function): Callback function triggered on payment failure.
-
-### `status` State
-
-The `status` state variable tracks the current status of the payment. It can have one of the following values:
-
-- `IPaymentStatus.idle`: The payment process has not started.
-- `IPaymentStatus.initiated`: The payment process has been initiated.
-- `IPaymentStatus.processing`: The payment is being processed.
-- `IPaymentStatus.completed`: The payment was successful.
-- `IPaymentStatus.failed`: The payment failed.
+- `testnet` (boolean, optional): Whether to use the testnet. Default is `false`.
+- `apiKey` (string): Your API key for authentication.
+- payload
+  - `destinationToken` (string): Token address of the token to be used for payment.
+  - `receiverAddress` (string): The wallet address of the receiver.
+  - `destinationChain` (number): The chain ID of the destination blockchain.
+  - `amount` (string): The amount to be paid in USD.
+  - `action` (object, optional): An object containing `payload` and `gasLimit` for custom actions.
 
 ---
 
 ## Types
 
-### `IPaymentStatus`
+### `SubOrder`
+
+An interface representing the SubOrder Schema:
+
+```typescript
+enum SubOrder {
+  type: "INPUT" | "OUTPUT";
+  sourceChain: number;
+  hash: string;
+  status: "PENDING" | "FULFILLED" | "FAILED";
+  gasUsed: number;
+}
+```
+
+### `OrderStatus`
 
 An enum representing the possible payment statuses:
 
 ```typescript
-enum IPaymentStatus {
-  idle = "idle",
-  initiated = "initiated",
-  processing = "processing",
-  completed = "completed",
-  failed = "failed",
+enum OrderStatus {
+  INITIALIZED = "INITIALIZED",
+  SIGNED = "SIGNED",
+  DECLINED = "DECLINED",
+  ASSIGNED = "ASSIGNED",
+  CREATED = "CREATED",
+  CREATED_FAILED = "CREATED_FAILED",
+  FULFILLED = "FULFILLED",
+  FULFILLED_FAILED = "FULFILLED_FAILED",
+  SETTLED = "SETTLED",
+  SETTLE_FAILED = "SETTLE_FAILED",
+  FAILED = "FAILED",
 }
 ```
 
-### `IPaymentRes`
+### `Order`
 
-An interface representing the response object returned on successful payment:
+An interface representing the response object returned on onPaymentCompleted/onPaymentStarted callback:
 
 ```typescript
 interface IPaymentRes {
   _id: string;
-  status: string;
+  id: string; // alias of _id
+  receiverAddress: string;
+  senderAddress: string;
+  destinationChain: number;
+  destinationToken: string;
+  amount: string;
+  minAmountOut: string;
+  orderHash: string;
+  status: OrderStatus;
+  readableStatus: string;
+  destinationPayload: string;
+  destinationGasLimit: number;
+  apiId: string;
+  solverApiId: string;
+  assignedTo: string;
+  assignedAt: string; // ISO timestamp
+  signedAt: string; // ISO timestamp
+  signedOrder: string;
+  createdAt: string; // ISO timestamp
+  updatedAt: string; // ISO timestamp
+  orderData: string; // JSON string
+  isSponsered: boolean;
+  subOrders: SubOrder[];
   // Additional fields may be present depending on the payment details
 }
 ```
@@ -154,27 +152,27 @@ interface IPaymentRes {
 ### Example 1: Basic Payment
 
 ```javascript
-const { pay, status } = useCrayPay();
-
-const handlePayment = () =>
-  pay(
-    {
-      destinationToken: "USDC",
-      receiverAddress: "0xReceiverAddress",
-      apiKey: "your-api-key",
-      testnet: true,
-      destinationChain: 1,
-      amount: "1.5",
-    },
-    {
-      onSuccess: (event) => {
-        console.log("Payment successful:", event);
-      },
-      onError: (error) => {
-        console.error("Payment failed:", error);
-      },
-    }
+const PaymentComponent = () => {
+  return (
+    <div>
+      <CrayPayButton
+        testnet={true}
+        apiKey={API_KEY}
+        onPaymentStarted={(e) => console.log("paymentStarted", e)}
+        onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
+        onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        payload={{
+          destinationToken: "0xTokenAddress",
+          receiverAddress: "0xReceiverAddress",
+          destinationChain: 1,
+          amount: "100",
+        }}
+      >
+        <button>Your custom Pay button/>
+      </CrayPayButton>
+    </div>
   );
+};
 ```
 
 ### Example 2: Contract
@@ -182,46 +180,43 @@ const handlePayment = () =>
 ```javascript
 import abi from "./your_nft_abi.json";
 
-const handlePayment = () =>
-  pay(
-    {
-      destinationToken: "0xTokenAddress",
-      receiverAddress: "0xReceiverAddress",
-      apiKey: "your-api-key",
-      testnet: true,
-      destinationChain: 1,
-      amount: "1.5",
-      action: {
-        abi,
-        functionName: "mint",
-        args: ["$$senderAddress"],
-        /**
-         * you can access senderAddress by `$$senderAddress` variable
-         *
-         */
-      },
-    },
-    {
-      onSuccess: (event) => {
-        console.log("Payment successful:", event);
-      },
-      onError: (error) => {
-        console.error("Payment failed:", error);
-      },
-    }
+const PaymentComponent = () => {
+  return (
+    <div>
+      <CrayPayButton
+        testnet={true}
+        apiKey={API_KEY}
+        onPaymentStarted={(e) => console.log("paymentStarted", e)}
+        onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
+        onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        payload={{
+          destinationToken: "0xTokenAddress",
+          receiverAddress: "0xReceiverAddress",
+          destinationChain: 1,
+          amount: "100",
+          action: {
+            payload: {
+              abi: abi,
+              functionName: "buy",
+              args: ["$$senderAddress", "120000"],
+              /** you can access senderAddress by `$$senderAddress` variable */
+            },
+            gasLimit: 200000,
+          },
+        }}
+      >
+        <button>Your custom Pay button/>
+      </CrayPayButton>
+    </div>
   );
+};
 ```
 
 ---
 
 ## Error Handling
 
-Errors during the payment process can be handled using the `onError` callback. Common errors include:
-
-- Popup blocking by the browser.
-- Invalid API key.
-- Network issues.
-- Payment failure on the blockchain.
+Errors during the payment process can be handled using the `onPaymentFailed`
 
 ---
 
