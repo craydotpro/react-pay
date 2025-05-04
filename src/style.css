@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+w3m-modal {
+  z-index: 999999;
+}
