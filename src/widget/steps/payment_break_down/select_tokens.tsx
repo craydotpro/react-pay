@@ -65,6 +65,10 @@ const SelectTokens = ({
           Select Token
         </p>
       </div>
+      <p className="cray-label-md px-5 text-slate-600 pt-2 pb-3">
+        <span className="font-bold">NOTE:</span> We've pre-selected the best
+        tokens for your payment. To change, deselect and choose others.
+      </p>
       <div className="flex flex-col">
         {userBalance?.map((balance: IAccountBalance) => {
           const isSelected = selectedTokens.has(

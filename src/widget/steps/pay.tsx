@@ -116,7 +116,7 @@ const PayScreen = () => {
     <div className="h-full">
       <div className="h-1/3 bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">
         <span className="text-[#667085] font-medium cray-label-md">
-          Request Amount
+          Requested Amount
         </span>
         <h3 className="cray-h3">${order?.amount}</h3>
       </div>
@@ -145,7 +145,7 @@ const PayScreen = () => {
         </div>
         <div className="flex w-full">
           <Button loading={handleSend.isPending} onClick={handlePayWithWallet}>
-            Review and Pay
+            Confirm and Pay
           </Button>
         </div>
       </div>

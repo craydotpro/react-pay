@@ -85,10 +85,10 @@ const PaymentBreakdown = () => {
             </button>
           </div>
         </div>
-        <span className="cray-label-md mt-[14px]">
-          NOTE: Add note here Add note here Add note here Add note here Add note
-          here Add note here Add note here
-        </span>
+        <p className="cray-label-md mt-[14px]">
+          <span className="font-bold">NOTE:</span> Cray finds the best way to
+          pay — but you're in control. Edit to pick other tokens.
+        </p>
         <div
           className={` border-error bg-red-50 rounded-[8px] text-center mt-5 text-error cray-label-md font-medium transition-all duration-200 ${
             isEnoughBalance || isLoading

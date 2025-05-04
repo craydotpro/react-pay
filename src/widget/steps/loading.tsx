@@ -66,8 +66,10 @@ const PaymentLoading = () => {
             : "Waiting for Signature"}
         </span>
         <span className="cray-label-lg font-medium text-slate-600 text-center">
-          Simple stablecoin payments, so easy even your grandpa can use it.
-          connect your wallet to continue.
+          {orderStatus === OrderStatus.SIGNED
+            ? "Hang tight - it's on its way."
+            : `Almost there. Just confirming it's you. Sign the message in your
+          wallet to proceed with payment.`}
         </span>
       </div>
     </div>

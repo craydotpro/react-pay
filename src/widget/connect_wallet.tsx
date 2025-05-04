@@ -40,15 +40,15 @@ const ConnectWallet = () => {
       <div className="flex flex-col items-center justify-center  h-1/2 gap-6 py-8">
         <div className="flex flex-col gap-2">
           <p className=" text-[28px] font-bold">
-            ${order?.amount} Requested Payment
+            ${order?.amount} Payment Requested
           </p>
           <p className=" text-slate-600 text-lg font-medium">
-            Please connect your wallet to continue
+            Connect the wallet you want to pay from
           </p>
         </div>
         <div className="px-5 w-full">
           <Button onClick={() => open()} className="">
-            Connect wallet
+            Continue with Wallet
           </Button>
         </div>
       </div>
