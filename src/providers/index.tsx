@@ -29,7 +29,7 @@ interface IState {
   payload: null | ICrayPayload;
   selectedBalances: any;
 }
-const defaultValue = {
+export const defaultValue = {
   status: IPaymentStatus.idle,
   loading: false,
   order: null,

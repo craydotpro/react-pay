@@ -2,7 +2,7 @@ import css from "../style.css";
 import typography from "../styles/typography.css";
 import PayModal from "./steps/modal";
 import { ReactElement, ReactNode, useContext, useEffect } from "react";
-import { CrayContext } from "../providers";
+import { CrayContext, defaultValue } from "../providers";
 import { IPaymentStatus } from "../types";
 import Button from "../ui/button";
 import { ICrayPayload, IOrder } from "../interface";
@@ -78,8 +78,8 @@ const PayWidget = ({
         <children.type
           {...children.props}
           onClick={() =>
-            setState((state) => ({
-              ...state,
+            setState(() => ({
+              ...defaultValue,
               apiKey,
               testnet,
               status: IPaymentStatus.initiated,
