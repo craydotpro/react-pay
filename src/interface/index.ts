@@ -36,7 +36,7 @@ export interface ICrayPayload {
   receiverAddress: string;
   orderType?: string;
   destinationChain: number;
-  action: {
+  action?: {
     payload: {
       abi: any;
       functionName: string;
