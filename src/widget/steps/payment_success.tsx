@@ -12,11 +12,11 @@ import { useContext, useMemo, useState } from "react";
 
 const PaymentSuccess = () => {
   const {
-    state: { order },
+    state: { order, testnet },
     setState,
   } = useContext(CrayContext);
   const [expandReceivedTokens, setExpandReceivedTokens] = useState(false);
-  const tokens = useTokens();
+  const tokens = useTokens({ testnet });
   const outputOrder = order?.subOrders?.find(
     (order: any) => order.type === "OUTPUT"
   );

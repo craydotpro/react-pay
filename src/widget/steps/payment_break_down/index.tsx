@@ -14,14 +14,21 @@ import { CrayContext } from "../../../providers";
 
 const PaymentBreakdown = () => {
   const {
-    state: { order, payload, userBalance, selectedBalances, orderAllocation },
+    state: {
+      order,
+      payload,
+      userBalance,
+      selectedBalances,
+      orderAllocation,
+      testnet,
+    },
     setState,
   } = useContext(CrayContext);
   const [showSelectTokens, setShowSelectTokens] = useState(false);
   const stepperContext = useContext(StepContext);
   const allocationOrder = useQuery({
     queryKey: ["allocatoin_order"],
-    queryFn: () => payWidgetService.GetAllocationOrder(),
+    queryFn: () => payWidgetService.GetAllocationOrder({ testnet }),
   });
   useEffect(() => {
     if (selectedBalances) return;

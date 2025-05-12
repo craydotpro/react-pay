@@ -95,15 +95,32 @@ class PayWidgetService {
         testnet,
       },
     });
-  GetAllTokens = async () => {
-    return (await axios.get(`${GATEWAY_HOST}/tokens`)).data.result;
+  GetAllTokens = async ({ testnet }: { testnet: any }) => {
+    return (
+      await axios.get(`${GATEWAY_HOST}/tokens`, {
+        headers: {
+          testnet,
+        },
+      })
+    ).data.result;
   };
-  GetUserBalance = async (address: string) => {
-    return (await axios.get(`${GATEWAY_HOST}/get-balance/${address}`)).data
-      .result;
+  GetUserBalance = async (address: string, testnet: any) => {
+    return (
+      await axios.get(`${GATEWAY_HOST}/get-balance/${address}`, {
+        headers: {
+          testnet,
+        },
+      })
+    ).data.result;
   };
-  GetAllocationOrder = async () => {
-    return (await axios.get(`${GATEWAY_HOST}/allocation-order`)).data.result;
+  GetAllocationOrder = async ({ testnet }: { testnet: any }) => {
+    return (
+      await axios.get(`${GATEWAY_HOST}/allocation-order`, {
+        headers: {
+          testnet,
+        },
+      })
+    ).data.result;
   };
 }
 export const payWidgetService = new PayWidgetService();

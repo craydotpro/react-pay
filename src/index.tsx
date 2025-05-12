@@ -16,7 +16,7 @@ const CrayPayButton = ({
   children,
 }: {
   apiKey: string;
-  testnet: boolean;
+  testnet?: boolean;
   payload: ICrayPayload;
   onPaymentStarted?: (params: IOrder) => any;
   onPaymentCompleted?: (params: IOrder) => any;

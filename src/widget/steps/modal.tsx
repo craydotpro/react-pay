@@ -22,7 +22,7 @@ const PayModal = ({ payload, apiKey, testnet }: any) => {
 
   const userBalance = useQuery({
     queryKey: ["user_balance"],
-    queryFn: () => payWidgetService.GetUserBalance(address!),
+    queryFn: () => payWidgetService.GetUserBalance(address!, testnet),
     enabled: !!address,
   });
   useEffect(() => {
