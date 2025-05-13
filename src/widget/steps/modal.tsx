@@ -71,7 +71,7 @@ const PayModal = ({ payload, apiKey, testnet }: any) => {
             <PaymentBreakdown />
           </Stepper.Step>
           <Stepper.Step>
-            <PayScreen />
+            <PayScreen {...stepperContext} />
           </Stepper.Step>
         </Stepper>
       )}
