@@ -20,16 +20,13 @@ const SelectTokens = ({
     state: { userBalance, selectedBalances, orderAllocation },
     setState,
   } = useContext(CrayContext);
-  const selectedTokens = useMemo(
-    () =>
-      new Set(
-        [...(selectedBalances || []), ...(orderAllocation || [])].map(
-          (_) => _.chainId + _.tokenAddress
-        )
-      ),
-    [selectedBalances, orderAllocation]
-  );
-
+  const selectedTokens = useMemo(() => {
+    return new Set(
+      [...(selectedBalances || orderAllocation || [])].map(
+        (_) => _.chainId + _.tokenAddress
+      )
+    );
+  }, [selectedBalances, orderAllocation]);
   const handleSelectBalance = (token: IAccountBalance) => {
     let newSelectedBalances;
     if (selectedTokens.has(token.chainId + token.tokenAddress)) {
@@ -46,9 +43,10 @@ const SelectTokens = ({
       selectedBalances: newSelectedBalances,
     }));
   };
+
   return (
     <div
-      className={`flex flex-col absolute transition-all duration-300 w-full h-full  bg-white ${
+      className={`flex flex-col absolute z-20 transition-all duration-300 w-full h-full  bg-white ${
         showSelectTokens ? "top-0" : "top-full"
       }`}
     >

@@ -1,4 +1,5 @@
 import axios from "redaxios";
+import { IAccountBalance } from "../interface";
 
 const GATEWAY_HOST = process.env.GATEWAY_HOST;
 class PayWidgetService {
@@ -113,13 +114,34 @@ class PayWidgetService {
       })
     ).data.result;
   };
-  GetAllocationOrder = async ({ testnet }: { testnet: any }) => {
+  GetAllocation = async ({
+    balances,
+    testnet,
+    amount,
+    destinationChain,
+    address,
+  }: {
+    balances: IAccountBalance[];
+    amount: string;
+    destinationChain: number;
+    testnet: any;
+    address: string;
+  }) => {
     return (
-      await axios.get(`${GATEWAY_HOST}/allocation-order`, {
-        headers: {
-          testnet,
+      await axios.post(
+        `${GATEWAY_HOST}/calculate-allocation`,
+        {
+          balances,
+          amount,
+          destinationChain,
+          address,
         },
-      })
+        {
+          headers: {
+            testnet,
+          },
+        }
+      )
     ).data.result;
   };
 }
