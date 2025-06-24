@@ -21,6 +21,7 @@ export interface ISpendBalance extends IAccountBalance {
   spend: string;
 }
 export interface IOrder {
+  _id: string;
   orderId: string;
   orderHash: string;
   status: string;

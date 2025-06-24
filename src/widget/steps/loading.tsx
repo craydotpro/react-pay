@@ -19,13 +19,13 @@ const PaymentLoading = () => {
     setState,
   } = useContext(CrayContext);
   useEffect(() => {
-    if (!order?.orderId) return;
+    if (!order?._id) return;
     let fetchStatus = true;
     (async () => {
       while (fetchStatus) {
         try {
           const res = await payWidgetService.Status({
-            orderId: order?.orderId,
+            orderId: order?._id,
             apiKey: apiKey,
             testnet: testnet,
           });
@@ -53,7 +53,7 @@ const PaymentLoading = () => {
         await _sleep(5000);
       }
     })();
-  }, [order?.orderId]);
+  }, [order?._id]);
   return (
     <div className="h-full">
       <div className="h-1/2 bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">

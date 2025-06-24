@@ -15,15 +15,7 @@ import { Loading } from "../../../ui/loading";
 const PaymentBreakdown = () => {
   const [loading, setLoading] = useState(false);
   const {
-    state: {
-      order,
-      payload,
-      userBalance,
-      selectedBalances,
-      orderAllocation,
-      testnet,
-      apiKey,
-    },
+    state: { payload, userBalance, selectedBalances, orderAllocation, testnet },
     setState,
   } = useContext(CrayContext);
   const [showSelectTokens, setShowSelectTokens] = useState(false);
@@ -31,6 +23,7 @@ const PaymentBreakdown = () => {
   const { address } = useAppKitAccount();
   useEffect(() => {
     let active = true;
+    setLoading(true);
     if (!userBalance) return;
     /** if no balance is selected then selectedBalance will be all the tokens user has */
     const selectedBalancesHash = (selectedBalances || userBalance)?.map(
@@ -41,15 +34,13 @@ const PaymentBreakdown = () => {
     );
 
     const fetchAllocation = async () => {
-      setLoading(true);
       const allocation = await payWidgetService.GetAllocation({
         balances: allowedBalance,
-        amount: order?.amount!,
+        amount: payload?.amount!,
         destinationChain: payload?.destinationChain!,
         testnet,
         address: address!,
       });
-      setLoading(false);
 
       if (active) {
         setState((states) => ({
@@ -58,7 +49,9 @@ const PaymentBreakdown = () => {
         }));
       }
     };
-    fetchAllocation();
+    fetchAllocation().then(() => {
+      setLoading(false);
+    });
     return () => {
       active = false;
     };
@@ -68,7 +61,7 @@ const PaymentBreakdown = () => {
       a + parseFloat(formatUnits(BigInt(b.balance), b.decimals)),
     0
   );
-  const isEnoughBalance = parseFloat(order?.amount!) <= allocationBalance;
+  const isEnoughBalance = parseFloat(payload?.amount!) <= allocationBalance;
   return (
     <div className="h-full">
       {loading ? (
@@ -80,7 +73,7 @@ const PaymentBreakdown = () => {
         <span className="text-[#667085] font-medium cray-label-md">
           Request Amount
         </span>
-        <h3 className="cray-h3">${order?.amount}</h3>
+        <h3 className="cray-h3">${payload?.amount}</h3>
       </div>
       <div className="p-5 flex flex-col">
         <div className="bg-[#F8F9FC]  rounded-[12px] border border-slate-200">
