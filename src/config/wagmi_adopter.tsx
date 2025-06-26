@@ -3,9 +3,16 @@ import { modal } from "@reown/appkit/react";
 
 import { WagmiProvider } from "wagmi";
 import {
+  arbitrum,
   arbitrumSepolia,
+  base,
   baseSepolia,
+  mainnet,
+  optimism,
   optimismSepolia,
+  polygon,
+  polygonAmoy,
+  sepolia,
 } from "@reown/appkit/networks";
 import { cookieStorage, createStorage } from "@wagmi/core";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
@@ -24,7 +31,19 @@ const metadata = {
 };
 
 // 3. Set the networks
-const networks = [arbitrumSepolia, baseSepolia, optimismSepolia] as any;
+const networks = [
+  arbitrum,
+  base,
+  mainnet,
+  optimism,
+  polygon,
+  /** testnet */
+  arbitrumSepolia,
+  baseSepolia,
+  optimismSepolia,
+  polygonAmoy,
+  sepolia,
+] as any;
 
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({

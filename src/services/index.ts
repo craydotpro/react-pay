@@ -1,4 +1,5 @@
 import axios from "redaxios";
+import { IAccountBalance } from "../interface";
 
 const GATEWAY_HOST = process.env.GATEWAY_HOST;
 class PayWidgetService {
@@ -95,15 +96,53 @@ class PayWidgetService {
         testnet,
       },
     });
-  GetAllTokens = async () => {
-    return (await axios.get(`${GATEWAY_HOST}/tokens`)).data.result;
+  GetAllTokens = async ({ testnet }: { testnet: any }) => {
+    return (
+      await axios.get(`${GATEWAY_HOST}/tokens`, {
+        headers: {
+          testnet,
+        },
+      })
+    ).data.result;
   };
-  GetUserBalance = async (address: string) => {
-    return (await axios.get(`${GATEWAY_HOST}/get-balance/${address}`)).data
-      .result;
+  GetUserBalance = async (address: string, testnet: any) => {
+    return (
+      await axios.get(`${GATEWAY_HOST}/get-balance/${address}`, {
+        headers: {
+          testnet,
+        },
+      })
+    ).data.result;
   };
-  GetAllocationOrder = async () => {
-    return (await axios.get(`${GATEWAY_HOST}/allocation-order`)).data.result;
+  GetAllocation = async ({
+    balances,
+    testnet,
+    amount,
+    destinationChain,
+    address,
+  }: {
+    balances: IAccountBalance[];
+    amount: string;
+    destinationChain: number;
+    testnet: any;
+    address: string;
+  }) => {
+    return (
+      await axios.post(
+        `${GATEWAY_HOST}/calculate-allocation`,
+        {
+          balances,
+          amount,
+          destinationChain,
+          address,
+        },
+        {
+          headers: {
+            testnet,
+          },
+        }
+      )
+    ).data.result;
   };
 }
 export const payWidgetService = new PayWidgetService();

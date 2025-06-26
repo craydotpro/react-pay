@@ -5,14 +5,20 @@ import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { useMutation } from "@tanstack/react-query";
 
 import { useSignMessage, useSignTypedData } from "wagmi";
-import { BankNote01, Hourglass03, Wallet03 } from "@untitled-ui/icons-react";
+import {
+  ArrowLeft,
+  BankNote01,
+  Hourglass03,
+  Wallet03,
+} from "@untitled-ui/icons-react";
 import PaymentLoading from "./loading";
 import { CHAINS } from "../../constants";
 import { useContext } from "react";
 import { CrayContext } from "../../providers";
 import { OrderStatus } from "../../interface";
+import { IStepData } from "../../ui/stepper";
 
-const PayScreen = () => {
+const PayScreen = ({ prev }: IStepData) => {
   const { address: senderAddress } = useAppKitAccount();
   const { signTypedDataAsync } = useSignTypedData();
   const { switchNetwork } = useAppKitNetwork();
@@ -25,26 +31,27 @@ const PayScreen = () => {
       onPaymentStarted,
       onPaymentFailed,
       apiKey,
+      payload,
       testnet,
     },
     setState,
   } = useContext(CrayContext);
   const handleSend = useMutation({
     mutationFn: async () => {
-      let updatedOrder;
       try {
-        let orderRes = await payWidgetService.SetOrderPayee({
-          orderHash: order?.orderId!,
+        let updatedOrder = await payWidgetService.Create({
           data: {
-            params: {
-              spenderAddress: senderAddress,
-              orderAllocation,
-            },
+            ...payload,
+            senderAddress: senderAddress,
+            sourceTokens: orderAllocation?.map(({ chainId, tokenAddress }) => ({
+              chainId,
+              address: tokenAddress,
+            })),
           },
-          apikey: apiKey,
-          testnet: testnet,
+          testnet,
+          apiKey,
         });
-        updatedOrder = orderRes.data.result;
+
         const signedApprovalData = [];
         for (let i = 0; i < updatedOrder.allowance?.length; i++) {
           const data = updatedOrder.allowance[i];
@@ -115,11 +122,20 @@ const PayScreen = () => {
   }
   return (
     <div className="h-full">
+      <Button
+        variant="ghost"
+        size="sm"
+        className="w-auto rounded-full border-0 absolute left-4 top-4"
+        onClick={() => prev()}
+      >
+        {" "}
+        <ArrowLeft width={24} />
+      </Button>
       <div className="h-1/3 bg-[#F8F9FC] flex flex-col items-center justify-center gap-5 pt-6 pb-9">
         <span className="text-[#667085] font-medium cray-label-md">
           Requested Amount
         </span>
-        <h3 className="cray-h3">${order?.amount}</h3>
+        <h3 className="cray-h3">${payload?.amount}</h3>
       </div>
       <div className="p-5 flex flex-col gap-5">
         <div className="flex flex-col divide-y divide-[#F2F4F7] font-medium cray-label-md">
