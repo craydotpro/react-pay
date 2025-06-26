@@ -22,7 +22,7 @@ interface IState {
   testnet: boolean;
   orderAllocation: null | ISpendBalance[];
   orderStatus: null | OrderStatus;
-  userBalance: IAccountBalance[];
+  userBalance: IAccountBalance[] | null;
   onPaymentStarted: (params: IOrder) => any;
   onPaymentCompleted: (params: IOrder) => any;
   onPaymentFailed: (params: IOrder) => any;
@@ -41,7 +41,7 @@ export const defaultValue = {
   onPaymentStarted: () => {},
   onPaymentCompleted: () => {},
   onPaymentFailed: () => {},
-  userBalance: [],
+  userBalance: null,
   payload: null,
   selectedBalances: null,
 };
