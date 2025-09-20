@@ -1,0 +1,14 @@
+export const crayProcessingOutlay = document.createElement("div");
+crayProcessingOutlay.style.width = "100%";
+crayProcessingOutlay.style.height = "100%";
+crayProcessingOutlay.style.top = "0";
+crayProcessingOutlay.style.left = "bottom";
+crayProcessingOutlay.style.position = "fixed";
+crayProcessingOutlay.style.backgroundColor = "rgb(0 0 0 / 0.50)";
+crayProcessingOutlay.style.zIndex = "9999";
+crayProcessingOutlay.style.color = "white";
+crayProcessingOutlay.style.display = "flex";
+crayProcessingOutlay.style.alignItems = "center";
+crayProcessingOutlay.style.justifyContent = "center";
+crayProcessingOutlay.style.cursor = "pointer";
+crayProcessingOutlay.innerHTML = "Complete your purchase in the cray window";

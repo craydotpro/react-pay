@@ -14,15 +14,17 @@
 <%if (mode === 'development') { %>
 <script>
   // need to push app style into shadow root to reflect changes in development
-  setInterval(()=>{
-    const shadowRoot=document.getElementById("cray-modal")?.shadowRoot;
-    if(shadowRoot){
-      const styleElem = shadowRoot.querySelector('style')
-      if(styleElem){
-        const style = [...document.querySelectorAll("style")].map(_ => _.innerHTML).join("")
-        styleElem.innerHTML = style
+  setInterval(() => {
+    const shadowRoot = document.getElementById("cray-modal")?.shadowRoot;
+    if (shadowRoot) {
+      const styleElem = shadowRoot.querySelector("style");
+      if (styleElem) {
+        const style = [...document.querySelectorAll("style")]
+          .map((_) => _.innerHTML)
+          .join("");
+        styleElem.innerHTML = style;
       }
     }
-  },1000)
+  }, 1000);
 </script>
 <% } %>
