@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React + Vite App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+<%if (mode === 'development') { %>
+<script>
+  // need to push app style into shadow root to reflect changes in development
+  setInterval(()=>{
+    const shadowRoot=document.getElementById("cray-modal")?.shadowRoot;
+    if(shadowRoot){
+      const styleElem = shadowRoot.querySelector('style')
+      if(styleElem){
+        const style = [...document.querySelectorAll("style")].map(_ => _.innerHTML).join("")
+        styleElem.innerHTML = style
+      }
+    }
+  },1000)
+</script>
+<% } %>
