@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+w3m-modal {
+  z-index: 999999;
+}
+.ahmadtest {
+  background-color: red;
+}
+@layer base {
+  :root {
+    --popup-animation: 200ms;
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 0 0% 0%; /* #00000 */
+
+    --primary: 25 100% 49%; /* #f96900 */
+    --primary-foreground: 0 0% 0%;
+    --input-bg: 0 0% 85%; /* #d9d9d9 */
+
+    --background_secondary: 4 0% 10%;
+    --background_secondary-foreground: 0 0% 93%;
+
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 44 0% 16%;
+
+    /* --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+
+      
+
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+
+        
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 222.2 84% 4.9%; */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  #app {
+    @apply shadow-xl md:rounded-lg;
+  }
+}
