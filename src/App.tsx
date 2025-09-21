@@ -1,12 +1,13 @@
-
+import CrayPayButton from "./cray-widget";
+const API_KEY = import.meta.env.VITE_DEMO_GATEWAY_API_KEY;
 export default function App() {
   return (
     <CrayPayButton
       testnet={true}
       apiKey={API_KEY}
-      onPaymentStarted={e => console.log("paymentStarted", e)}
-      onPaymentCompleted={e => console.log("paymentCompeted", e)}
-      onPaymentFailed={e => console.log("paymentFailed", e)}
+      onPaymentStarted={(e) => console.log("paymentStarted", e)}
+      onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
+      onPaymentFailed={(e) => console.log("paymentFailed", e)}
       payload={{
         destinationChain: 137,
         amount: ".001",
