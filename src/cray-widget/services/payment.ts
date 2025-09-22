@@ -7,8 +7,6 @@ class PaymentService {
   SubmitOrder = async (orderId: string, payload: any) =>
     (await xhr.post(`/orders/${orderId}`, payload)).data;
   ListenStatus = (orderId: string) =>
-    new EventSource(
-      import.meta.env.VITE_API_HOST + `/orders/${orderId}?sse=true`
-    );
+    new EventSource(ENV.VITE_API_HOST + `/orders/${orderId}?sse=true`);
 }
 export const paymentService = new PaymentService();

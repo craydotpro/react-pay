@@ -17,11 +17,12 @@ import {
 import { cookieStorage, createStorage } from "@wagmi/core";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import React from "react";
+import { ENV } from "../env";
 
 // 0. Setup queryClient
 
 // 1. Get projectId from https://cloud.reown.com
-const projectId = import.meta.env.VITE_WALLET_KIT_PROJECT_ID!;
+const projectId = ENV.VITE_WALLET_KIT_PROJECT_ID!;
 // 2. Create a metadata object - optional
 const metadata = {
   name: "Cray pay",
