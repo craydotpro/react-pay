@@ -54,7 +54,6 @@ const wagmiAdapter = new WagmiAdapter({
   networks,
   projectId,
 });
-
 export function AppKitProvider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>{children}</WagmiProvider>
@@ -77,9 +76,9 @@ export const AppKitProviderWrapper = ({
       // },
     });
   }
-  if (!modal || modal?.options?.projectId === projectId) {
-    return <AppKitProvider>{children}</AppKitProvider>;
-  } else {
+  if (modal && modal?.options?.projectId !== projectId) {
     return children;
+  } else {
+    return <AppKitProvider>{children}</AppKitProvider>;
   }
 };

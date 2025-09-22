@@ -1,11 +1,9 @@
 // import legacy from "@vitejs/plugin-legacy"; not supported library mode yet
-import reactRefresh from "@vitejs/plugin-react-refresh";
 import react from "@vitejs/plugin-react-swc";
 
 import path from "path";
 import { fileURLToPath } from "url";
 import { defineConfig, loadEnv } from "vite";
-import { createHtmlPlugin } from "vite-plugin-html";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -16,7 +14,7 @@ export default defineConfig(({ mode }) => {
       lib: {
         entry: path.resolve(__dirname, "src/cray-widget/index.tsx"),
         name: "dd-react",
-        fileName: format => `index.${format}.js`,
+        fileName: (format) => `index.${format}.js`,
       },
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
@@ -31,12 +29,7 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    plugins: [
-      react(),
-      createHtmlPlugin({
-        inject: { data: Object.assign({ mode }, process.env) },
-      }),
-    ],
+    plugins: [react()],
     esbuild: {
       jsxInject: `import React from 'react'`, // automatically import React in jsx files
     },
@@ -51,7 +44,7 @@ export default defineConfig(({ mode }) => {
         "/api": {
           target: "http://localhost:8080",
           secure: false,
-          rewrite: path => path.replace(/^\/api/, ""),
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },

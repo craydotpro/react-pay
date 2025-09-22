@@ -28,7 +28,8 @@ const AmountBreakdown = () => {
   //   userTokens,
   //   selectedTokens,
   // } = useBridgeStore();
-  const [debouncedAmount] = useDebounce(payload.amount, 1000);
+  // const [debouncedAmount] = useDebounce(payload.amount, 1000);
+  const debouncedAmount = payload.amount;
   useEffect(() => {
     let active = true;
     useAppStore.setState(() => ({ orderAllocation: null }));
