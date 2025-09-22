@@ -19,6 +19,8 @@ const PaymentConfirmation = () => {
     (state) => state.payload
   );
   const orderAllocation = useAppStore((state) => state.orderAllocation);
+  const callBacks = useAppStore((state) => state.callBacks);
+
   const { address } = useAppKitAccount();
   const handleSend = useMutation({
     mutationFn: async () => {
@@ -33,6 +35,7 @@ const PaymentConfirmation = () => {
           chainId,
         })),
       });
+      callBacks.onPaymentStarted(order);
       useAppStore.setState({
         orderId: order.orderId,
         order,

@@ -8,6 +8,7 @@ export default function App() {
       onPaymentStarted={(e) => console.log("paymentStarted", e)}
       onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
       onPaymentFailed={(e) => console.log("paymentFailed", e)}
+      onPaymentRejected={(e) => console.log("paymentRejected", e)}
       payload={{
         destinationChain: 137,
         amount: ".001",

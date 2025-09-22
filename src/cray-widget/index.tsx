@@ -12,6 +12,7 @@ const CrayPayButton = ({
   onPaymentStarted = () => {},
   onPaymentCompleted = () => {},
   onPaymentFailed = () => {},
+  onPaymentRejected = () => {},
   children,
 }: {
   apiKey: string;
@@ -20,6 +21,7 @@ const CrayPayButton = ({
   onPaymentStarted?: (params: IOrder) => any;
   onPaymentCompleted?: (params: IOrder) => any;
   onPaymentFailed?: (params: IOrder) => any;
+  onPaymentRejected?: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
   const {
@@ -57,6 +59,7 @@ const CrayPayButton = ({
           onPaymentStarted={onPaymentStarted}
           onPaymentCompleted={onPaymentCompleted}
           onPaymentFailed={onPaymentFailed}
+          onPaymentRejected={onPaymentRejected}
           children={children}
         />
       </AppKitProviderWrapper>

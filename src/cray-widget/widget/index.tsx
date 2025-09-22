@@ -52,6 +52,7 @@ const PayWidget = ({
   onPaymentStarted,
   onPaymentCompleted,
   onPaymentFailed,
+  onPaymentRejected,
   children,
 }: {
   payload: ICrayPayload;
@@ -60,6 +61,7 @@ const PayWidget = ({
   onPaymentStarted: (params: IOrder) => any;
   onPaymentCompleted: (params: IOrder) => any;
   onPaymentFailed: (params: IOrder) => any;
+  onPaymentRejected: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
   const [css, setCss] = useState("");
@@ -76,6 +78,7 @@ const PayWidget = ({
       onPaymentStarted,
       onPaymentCompleted,
       onPaymentFailed,
+      onPaymentRejected,
     });
   };
   useEffect(() => {

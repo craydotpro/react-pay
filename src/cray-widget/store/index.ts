@@ -32,6 +32,7 @@ interface IAppStore {
     onPaymentStarted?: (params: IOrder) => any;
     onPaymentCompleted?: (params: IOrder) => any;
     onPaymentFailed?: (params: IOrder) => any;
+    onPaymentRejected?: (params: IOrder) => any;
   };
   setCallBacks: Function;
 }
@@ -54,6 +55,7 @@ const initialState = {
     onPaymentStarted: () => {},
     onPaymentCompleted: () => {},
     onPaymentFailed: () => {},
+    onPaymentRejected: () => {},
   },
 };
 export const useAppStore = create<IAppStore>((set, get) => ({
@@ -62,7 +64,7 @@ export const useAppStore = create<IAppStore>((set, get) => ({
     let selectedTokens;
     if (!get().selectedTokens) {
       selectedTokens = tokens
-        .map(_ => _.chainId + _.tokenAddress)
+        .map((_) => _.chainId + _.tokenAddress)
         .reduce((obj, prop) => {
           obj[prop] = true;
           return obj;
@@ -79,6 +81,7 @@ export const useAppStore = create<IAppStore>((set, get) => ({
       },
     });
   },
-  setCallBacks: (callBacks: IAppStore["callBacks"]) => set({ callBacks }),
+  setCallBacks: (callBacks: IAppStore["callBacks"]) =>
+    set({ ...get().callBacks, callBacks }),
   reset: () => set({ ...initialState }),
 }));

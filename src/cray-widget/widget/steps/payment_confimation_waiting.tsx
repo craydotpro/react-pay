@@ -15,7 +15,11 @@ import PaymentError from "./payment_error";
 const PaymentConfirmationWaiting = () => {
   const { signTypedDataAsync } = useSignTypedData();
   const { switchNetwork } = useAppKitNetwork();
-  const { order, stage, status } = useAppStore();
+  const order = useAppStore((state) => state.order);
+  const stage = useAppStore((state) => state.stage);
+  const status = useAppStore((state) => state.status);
+  const callBacks = useAppStore((state) => state.callBacks);
+
   useEffect(() => {
     (async () => {
       try {
@@ -34,13 +38,19 @@ const PaymentConfirmationWaiting = () => {
           try {
             const data = JSON.parse(event.data);
             useAppStore.setState({ stage: data.stage, status: data.status });
-
-            console.log(4, data);
+            if (data.status === OrderStatus.COMPLETED) {
+              callBacks.onPaymentCompleted(order);
+            } else if (data.status === OrderStatus.FAILED) {
+              callBacks.onPaymentFailed(order);
+            }
           } catch (error) {
             console.log(error);
           }
         };
       } catch (error) {
+        if (String(error).includes("User rejected the request.")) {
+          callBacks.onPaymentRejected(error);
+        }
         console.log(error);
         useAppStore.setState({ status: OrderStatus.FAILED });
       }
