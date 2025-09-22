@@ -13,7 +13,10 @@ const BalanceChip = ({
   return (
     <div className="p-1 pr-2 rounded-full border border-[#EAECF0] bg-white flex items-center gap-2 shrink-0">
       <div className="relative">
-        <img src={`/chains/${chain}.svg`} className="w-6 h-6" />
+        <img
+          src={`https://app.cray.pro/icons/chains/${chain}.svg`}
+          className="w-6 h-6"
+        />
         <img
           src={token?.icon}
           className="w-[14px] h-[14px] absolute left-[13px] top-[13px]"

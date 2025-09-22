@@ -45,7 +45,9 @@ const TokensSelector = ({
             >
               <div className="flex items-center gap-4">
                 <div className="w-9 h-9 relative">
-                  <img src={`/chains/${balance.chainId}.svg`} />
+                  <img
+                    src={`https://app.cray.pro/icons/chains/${balance.chainId}.svg`}
+                  />
                   <img
                     src={balance?.icon}
                     className="absolute w-5 z-1  left-[20px] top-[20px]"
