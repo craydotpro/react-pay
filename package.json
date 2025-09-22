@@ -1,10 +1,10 @@
 {
   "name": "@craynetwork/react-pay",
   "type": "module",
-  "version": "2.0.15",
+  "version": "3.0.2",
   "description": "One click seamless crypto payments",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "dist/src/cray-widget/index.js",
+  "module": "dist/src/cray-widget/index.es.js",
   "scripts": {
     "dev": "vite --host",
     "build": "rimraf dist && npx rollup -c && tsc --emitDeclarationOnly",

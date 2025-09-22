@@ -15,11 +15,11 @@ export default [
     input: "./src/cray-widget/index.tsx",
     output: [
       {
-        file: "dist/index.js",
+        file: "dist/src/cray-widget/index.js",
         format: "cjs",
       },
       {
-        file: "dist/index.es.js",
+        file: "dist/src/cray-widget/index.es.js",
         format: "es",
         exports: "named",
       },
