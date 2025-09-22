@@ -34,9 +34,7 @@ xhr.interceptors.request.use(
 //
 xhr.interceptors.request.use(
   function (config: any) {
-    config.headers.testnet = JSON.parse(
-      localStorage.getItem("bridge_app_is_testnet") || "false"
-    );
+    config.headers.testnet = JSON.stringify(!!useAppStore.getState().testnet);
     return config;
   },
   function (error) {
