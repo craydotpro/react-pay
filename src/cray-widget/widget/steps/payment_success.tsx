@@ -12,7 +12,7 @@ const PaymentSuccess = () => {
   const order = useAppStore((state) => state.order);
   const orderAllocation = useAppStore((state) => state.orderAllocation);
   const { destinationChain } = useAppStore((state) => state.payload);
-
+  const reset = useAppStore((state) => state.reset);
   return (
     <div className=" flex flex-col h-full">
       <div className="h-full">
@@ -61,7 +61,7 @@ const PaymentSuccess = () => {
           </div>
         </div>
         <div className="px-5 pb-5 flex items-center justify-center">
-          <Button>Close</Button>
+          <Button onClick={() => reset}>Close</Button>
         </div>
       </div>
     </div>
