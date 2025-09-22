@@ -1,5 +1,4 @@
 import "./style.css";
-import "./typography.css";
 import { ReactElement, useMemo } from "react";
 import PayWidget from "./widget";
 import { QueryClientProvider } from "@tanstack/react-query";

@@ -1,5 +1,5 @@
 import PayModal from "./steps/modal";
-import { ReactElement, ReactNode, useMemo } from "react";
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
 import { ICrayPayload, IOrder } from "../interface";
 import ReactDOM from "react-dom";
 import { useAppStore } from "../store";
@@ -62,6 +62,7 @@ const PayWidget = ({
   onPaymentFailed: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
+  const [css, setCss] = useState("");
   const orderInitiated = useAppStore((state) => state.payload);
   const initOrder = useAppStore((state) => state.initOrder);
   const setCallBacks = useAppStore((state) => state.setCallBacks);
@@ -77,11 +78,16 @@ const PayWidget = ({
       onPaymentFailed,
     });
   };
-  const css = useMemo(
-    () =>
-      [...document.querySelectorAll("style")].map((_) => _.innerHTML).join(""),
-    []
-  );
+  useEffect(() => {
+    if (process.env.IS_ROLLUP) {
+      import("../style.css").then((e) => setCss(e.default));
+    } else {
+      setCss(
+        [...document.querySelectorAll("style")].map((_) => _.innerHTML).join("")
+      );
+    }
+  }, []);
+
   if (orderInitiated) {
     return (
       <Portal portalTarget={crayModal!}>
