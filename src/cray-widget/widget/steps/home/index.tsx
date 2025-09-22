@@ -3,19 +3,19 @@ import AmountBreakdown from "./amount_breakdown";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useContext, useEffect, useMemo } from "react";
 import { formatUnits, isAddress } from "viem";
-import { useAppStore } from "@/cray-widget/store";
-import { Button } from "@/components/ui/button";
-import { balanceService } from "@/cray-widget/services/balance";
-import { ITokens } from "@/interfaces";
-import { StepContext } from "@/components/stepper";
+import { useAppStore } from "../../../../cray-widget/store";
+import { Button } from "../../../../components/ui/button";
+import { balanceService } from "../../../../cray-widget/services/balance";
+import { ITokens } from "../../../../interfaces";
+import { StepContext } from "../../../../components/stepper";
 
 const Home = () => {
   const stepperContext = useContext(StepContext);
 
   const { address } = useAppKitAccount();
-  const payload = useAppStore(state => state.payload);
-  const setUserTokens = useAppStore(state => state.setUserTokens);
-  const orderAllocation = useAppStore(state => state.orderAllocation);
+  const payload = useAppStore((state) => state.payload);
+  const setUserTokens = useAppStore((state) => state.setUserTokens);
+  const orderAllocation = useAppStore((state) => state.orderAllocation);
   //   const {
   //     testnet,
   //     setUserTokens,
@@ -23,6 +23,7 @@ const Home = () => {
   //     orderAllocation,
   //     destinationAddress,
   //   } = useBridgeStore();
+
   const userTokens = useQuery({
     queryKey: ["user_balance", payload.testnet],
     queryFn: () => balanceService.GetAll(address!),

@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Checkbox } from "./ui/checkbox";
 import type { ITokens } from "../interfaces";
-import { useAppStore } from "@/cray-widget/store";
+import { useAppStore } from "../cray-widget/store";
 
 const TokensSelector = ({
   isEnable,
@@ -10,7 +10,7 @@ const TokensSelector = ({
   isEnable: boolean;
   setEnable: Function;
 }) => {
-  const { selectedTokens, userTokens } = useAppStore(state => state);
+  const { selectedTokens, userTokens } = useAppStore((state) => state);
 
   return (
     <div
@@ -34,7 +34,7 @@ const TokensSelector = ({
                 isSelected && "bg-slate-50"
               }`}
               onClick={() =>
-                useAppStore.setState(state => ({
+                useAppStore.setState((state) => ({
                   ...state,
                   selectedTokens: {
                     ...state.selectedTokens,

@@ -5,20 +5,20 @@ import { useAppKitAccount } from "@reown/appkit/react";
 // import { Button } from "../components/ui/button";
 // import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { prettifyAddress } from "@/utils";
-import { Button } from "@/components/ui/button";
-import { paymentService } from "@/cray-widget/services/payment";
-import { useAppStore } from "@/cray-widget/store";
+import { prettifyAddress } from "../../../utils";
+import { Button } from "../../../components/ui/button";
+import { paymentService } from "../../../cray-widget/services/payment";
+import { useAppStore } from "../../../cray-widget/store";
 import { useContext } from "react";
-import { StepContext } from "@/components/stepper";
+import { StepContext } from "../../../components/stepper";
 
 const PaymentConfirmation = () => {
   const stepperContext = useContext(StepContext);
 
   const { amount, destinationChain, destinationAddress } = useAppStore(
-    state => state.payload
+    (state) => state.payload
   );
-  const orderAllocation = useAppStore(state => state.orderAllocation);
+  const orderAllocation = useAppStore((state) => state.orderAllocation);
   const { address } = useAppKitAccount();
   const handleSend = useMutation({
     mutationFn: async () => {

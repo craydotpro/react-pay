@@ -3,7 +3,7 @@ import { ReactElement, ReactNode, useMemo } from "react";
 import { ICrayPayload, IOrder } from "../interface";
 import ReactDOM from "react-dom";
 import { useAppStore } from "../store";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 let crayModal = document.getElementById("cray-modal")?.shadowRoot;
 if (!crayModal) {
   const container = document.createElement("div");
@@ -13,7 +13,7 @@ if (!crayModal) {
   crayModal = container.shadowRoot;
 }
 const CloseIcon = () => {
-  const reset = useAppStore(state => state.reset);
+  const reset = useAppStore((state) => state.reset);
   const handleClose = () => reset();
   return (
     <button
@@ -62,9 +62,9 @@ const PayWidget = ({
   onPaymentFailed: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
-  const orderInitiated = useAppStore(state => state.payload);
-  const initOrder = useAppStore(state => state.initOrder);
-  const setCallBacks = useAppStore(state => state.setCallBacks);
+  const orderInitiated = useAppStore((state) => state.payload);
+  const initOrder = useAppStore((state) => state.initOrder);
+  const setCallBacks = useAppStore((state) => state.setCallBacks);
   const handleNext = () => {
     useAppStore.setState(() => ({
       apikey: apiKey,
@@ -79,7 +79,7 @@ const PayWidget = ({
   };
   const css = useMemo(
     () =>
-      [...document.querySelectorAll("style")].map(_ => _.innerHTML).join(""),
+      [...document.querySelectorAll("style")].map((_) => _.innerHTML).join(""),
     []
   );
   if (orderInitiated) {

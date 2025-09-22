@@ -1,10 +1,10 @@
 import { useAppKit } from "@reown/appkit/react";
 import { useAppStore } from "../store";
-import { _sleep } from "@/utils";
-import { Button } from "@/components/ui/button";
+import { _sleep } from "../../utils";
+import { Button } from "../../components/ui/button";
 
 const ConnectWallet = () => {
-  const payload = useAppStore(state => state.payload);
+  const payload = useAppStore((state) => state.payload);
   const { open } = useAppKit();
 
   return (

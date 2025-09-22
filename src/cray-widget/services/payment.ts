@@ -1,4 +1,5 @@
-import { xhr } from "@/utils";
+import { xhr } from "../../utils";
+import { ENV } from "../env";
 
 class PaymentService {
   CreateOrder = async (payload: any) =>

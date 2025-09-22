@@ -7,7 +7,7 @@ import {
   type IOrderAllocation,
   type ITokens,
 } from "../interface";
-import { CHAINS } from "@/config/chains";
+import { CHAINS } from "../../config/chains";
 import { mainnet } from "viem/chains";
 
 interface IAppStore {

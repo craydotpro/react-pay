@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 // import { paymentService } from "../services/payment";
 // import { useBridgeStore } from "../store";
-import { OrderStage, OrderStatus } from "@/interfaces";
+import { OrderStage, OrderStatus } from "../../../interfaces";
 import { useAppKitNetwork } from "@reown/appkit/react";
 import { useSignTypedData } from "wagmi";
 // import PaymentSuccess from "./payment_success";
-import { paymentService } from "@/cray-widget/services/payment";
-import { useAppStore } from "@/cray-widget/store";
-import { signOrder } from "@/utils/sign_order";
-import { Loading } from "@/components/ui/loading";
+import { paymentService } from "../../../cray-widget/services/payment";
+import { useAppStore } from "../../../cray-widget/store";
+import { signOrder } from "../../../utils/sign_order";
+import { Loading } from "../../../components/ui/loading";
 import PaymentSuccess from "./payment_success";
 import PaymentError from "./payment_error";
 

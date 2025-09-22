@@ -1,4 +1,4 @@
-import { useAppStore } from "@/cray-widget/store";
+import { useAppStore } from "../cray-widget/store";
 import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -22,7 +22,7 @@ export const xhr = axios.create({
   baseURL: import.meta.env.VITE_API_HOST,
 });
 xhr.interceptors.request.use(
-  function (config) {
+  function (config: any) {
     config.headers.apikey = useAppStore.getState().apikey;
     return config;
   },
@@ -32,7 +32,7 @@ xhr.interceptors.request.use(
 );
 //
 xhr.interceptors.request.use(
-  function (config) {
+  function (config: any) {
     config.headers.testnet = JSON.parse(
       localStorage.getItem("bridge_app_is_testnet") || "false"
     );

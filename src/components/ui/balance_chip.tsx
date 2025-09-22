@@ -1,5 +1,5 @@
-import type { IOrderAllocation } from "@/interfaces";
-import { SHOW } from "@/utils";
+import type { IOrderAllocation } from "../../interfaces";
+import { SHOW } from "../../utils";
 
 import { formatUnits } from "viem";
 

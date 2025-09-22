@@ -1,7 +1,7 @@
 import { useAppKitAccount } from "@reown/appkit/react";
 // import { Stepper, useStepData } from "../../ui/stepper";
 import ConnectWallet from "../connect_wallet";
-import { Stepper, useStepData } from "@/components/stepper";
+import { Stepper, useStepData } from "../../../components/stepper";
 import Home from "./home";
 import PaymentConfirmation from "./payment_confimation";
 import PaymentConfirmationWaiting from "./payment_confimation_waiting";

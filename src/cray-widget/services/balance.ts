@@ -1,5 +1,5 @@
-import type { ITokens } from "@/interfaces";
-import { xhr } from "@/utils";
+import type { ITokens } from "../../interfaces";
+import { xhr } from "../../utils";
 
 class BalanceService {
   GetAll = async (address: string) =>

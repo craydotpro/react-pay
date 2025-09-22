@@ -1,17 +1,17 @@
 import { useState } from "react";
-import type { IOrderAllocation } from "@/interfaces";
+import type { IOrderAllocation } from "../../../interfaces";
 import { ChevronDown } from "lucide-react";
-import { useAppStore } from "@/cray-widget/store";
-import Coins from "@/components/ui/coins";
-import BalanceChip from "@/components/ui/balance_chip";
-import { Button } from "@/components/ui/button";
-import SuccessIcon from "@/components/ui/success_icon";
+import { useAppStore } from "../../../cray-widget/store";
+import Coins from "../../../components/ui/coins";
+import BalanceChip from "../../../components/ui/balance_chip";
+import { Button } from "../../../components/ui/button";
+import SuccessIcon from "../../../components/ui/success_icon";
 const PaymentSuccess = () => {
   const [expandReceivedTokens, setExpandReceivedTokens] = useState(true);
 
-  const order = useAppStore(state => state.order);
-  const orderAllocation = useAppStore(state => state.orderAllocation);
-  const { destinationChain } = useAppStore(state => state.payload);
+  const order = useAppStore((state) => state.order);
+  const orderAllocation = useAppStore((state) => state.orderAllocation);
+  const { destinationChain } = useAppStore((state) => state.payload);
 
   return (
     <div className=" flex flex-col h-full">

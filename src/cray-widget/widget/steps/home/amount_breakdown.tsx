@@ -1,25 +1,25 @@
 import { Wallet2 } from "lucide-react";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useEffect, useState } from "react";
-import type { IOrderAllocation, ITokens } from "@/interfaces";
-import { isValidNumber, prettifyAddress } from "@/utils";
-import TokensSelector from "@/components/tokens_selector";
+import type { IOrderAllocation, ITokens } from "../../../../interfaces";
+import { isValidNumber, prettifyAddress } from "../../../../utils";
+import TokensSelector from "../../../../components/tokens_selector";
 import { useDebounce } from "use-debounce";
 import { formatUnits } from "viem";
-import { CopyButton } from "@/components/ui/copy_button";
-import { useAppStore } from "@/cray-widget/store";
-import { Loading } from "@/components/ui/loading";
-import BalanceChip from "@/components/ui/balance_chip";
-import { balanceService } from "@/cray-widget/services/balance";
+import { CopyButton } from "../../../../components/ui/copy_button";
+import { useAppStore } from "../../../../cray-widget/store";
+import { Loading } from "../../../../components/ui/loading";
+import BalanceChip from "../../../../components/ui/balance_chip";
+import { balanceService } from "../../../../cray-widget/services/balance";
 
 const AmountBreakdown = () => {
   const [fetchingAllocation, setFetchingAllocation] = useState(false);
   const [showSelectTokens, setShowSelectTokens] = useState(false);
   const { address } = useAppKitAccount();
-  const payload = useAppStore(state => state.payload);
-  const userTokens = useAppStore(state => state.userTokens);
-  const selectedTokens = useAppStore(state => state.selectedTokens);
-  const orderAllocation = useAppStore(state => state.orderAllocation);
+  const payload = useAppStore((state) => state.payload);
+  const userTokens = useAppStore((state) => state.userTokens);
+  const selectedTokens = useAppStore((state) => state.selectedTokens);
+  const orderAllocation = useAppStore((state) => state.orderAllocation);
 
   // const {
   //   amount,
@@ -40,7 +40,7 @@ const AmountBreakdown = () => {
         amount: debouncedAmount,
         destinationChain: payload.destinationChain?.id!,
         tokens: userTokens.filter(
-          _ => selectedTokens?.[_.chainId + _.tokenAddress]
+          (_) => selectedTokens?.[_.chainId + _.tokenAddress]
         ),
       });
       if (active) {

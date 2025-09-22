@@ -1,5 +1,5 @@
-import { StepContext } from "@/components/stepper";
-import { Button } from "@/components/ui/button";
+import { StepContext } from "../../../components/stepper";
+import { Button } from "../../../components/ui/button";
 import { useContext } from "react";
 
 const PaymentError = ({ error }: { error?: string }) => {
