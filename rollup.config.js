@@ -8,22 +8,33 @@ import tailwindcss from "tailwindcss";
 import tailwindConfig from "./tailwind.config.cjs";
 import commonjs from "@rollup/plugin-commonjs";
 import dotenv from "rollup-plugin-dotenv";
+import replace from "@rollup/plugin-replace";
+
 export default [
   {
-    input: "./src/index.tsx",
+    input: "./src/cray-widget/index.tsx",
     output: [
       {
-        file: "dist/index.js",
+        file: "dist/src/cray-widget/index.js",
         format: "cjs",
       },
       {
-        file: "dist/index.es.js",
+        file: "dist/src/cray-widget/index.es.js",
         format: "es",
         exports: "named",
       },
     ],
     plugins: [
       dotenv(),
+      replace({
+        "import.meta.env?.VITE_API_HOST": "''",
+        "import.meta.env?.VITE_GATEWAY_API_KEY": "''",
+        "import.meta.env?.VITE_WALLET_KIT_PROJECT_ID": "''",
+        "process.env.IS_ROLLUP": "true",
+
+        // Ensure replacements only apply to whole words to avoid unintended substitutions
+        preventAssignment: true,
+      }),
       commonjs(),
       postcss({
         config: {

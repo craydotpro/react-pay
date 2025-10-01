@@ -42,9 +42,10 @@ const PaymentComponent = () => {
         onPaymentStarted={(e) => console.log("paymentStarted", e)}
         onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
           destinationToken: "0xTokenAddress",
-          receiverAddress: "0xReceiverAddress",
+          destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
         }}
@@ -68,7 +69,7 @@ It accepts These arguments:
 - `apiKey` (string): Your API key for authentication.
 - payload
   - `destinationToken` (string): Token address of the token to be used for payment.
-  - `receiverAddress` (string): The wallet address of the receiver.
+  - `destinationAddress` (string): The wallet address of the receiver.
   - `destinationChain` (number): The chain ID of the destination blockchain.
   - `amount` (string): The amount to be paid in USD.
   - `action` (object, optional): An object containing `payload` and `gasLimit` for custom actions.
@@ -119,7 +120,7 @@ An interface representing the response object returned on onPaymentCompleted/onP
 interface IPaymentRes {
   _id: string;
   id: string; // alias of _id
-  receiverAddress: string;
+  destinationAddress: string;
   senderAddress: string;
   destinationChain: number;
   destinationToken: string;
@@ -161,9 +162,10 @@ const PaymentComponent = () => {
         onPaymentStarted={(e) => console.log("paymentStarted", e)}
         onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
           destinationToken: "0xTokenAddress",
-          receiverAddress: "0xReceiverAddress",
+          destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
         }}
@@ -189,9 +191,10 @@ const PaymentComponent = () => {
         onPaymentStarted={(e) => console.log("paymentStarted", e)}
         onPaymentCompleted={(e) => console.log("paymentCompeted", e)}
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
+        onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
           destinationToken: "0xTokenAddress",
-          receiverAddress: "0xReceiverAddress",
+          destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
           action: {
@@ -216,7 +219,7 @@ const PaymentComponent = () => {
 
 ## Error Handling
 
-Errors during the payment process can be handled using the `onPaymentFailed`
+Errors during the payment process can be handled using the `onPaymentFailed` and `onPaymentRejected`
 
 ---
 
