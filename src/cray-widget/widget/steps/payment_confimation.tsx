@@ -1,9 +1,5 @@
 import { ArrowLeft, Banknote, Hourglass, Wallet } from "lucide-react";
-// import { useBridgeStore } from "../store";
-// import { prettifyAddress } from "../lib/utils";
 import { useAppKitAccount } from "@reown/appkit/react";
-// import { Button } from "../components/ui/button";
-// import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { prettifyAddress } from "../../../utils";
 import { Button } from "../../../components/ui/button";
@@ -24,26 +20,29 @@ const PaymentConfirmation = () => {
   const { address } = useAppKitAccount();
   const handleSend = useMutation({
     mutationFn: async () => {
-      const order = await paymentService.CreateOrder({
-        receiverAddress: destinationAddress,
-        destinationChain: destinationChain?.id!,
-        amount: amount,
-        orderType: "dapp",
-        senderAddress: address!,
-        sourceTokens: orderAllocation?.map(({ tokenAddress, chainId }) => ({
-          address: tokenAddress,
-          chainId,
-        })),
-      });
-      callBacks.onPaymentStarted(order);
-      useAppStore.setState({
-        orderId: order.orderId,
-        order,
-        status: order.status,
-        stage: order.stage,
-      });
-      stepperContext.next();
-      // navigate("/wait-for-confirmation");
+      try {
+        const order = await paymentService.CreateOrder({
+          receiverAddress: destinationAddress,
+          destinationChain: destinationChain?.id!,
+          amount: amount,
+          orderType: "dapp",
+          senderAddress: address!,
+          sourceTokens: orderAllocation?.map(({ tokenAddress, chainId }) => ({
+            address: tokenAddress,
+            chainId,
+          })),
+        });
+        callBacks.onPaymentStarted(order);
+        useAppStore.setState({
+          orderId: order.orderId,
+          order,
+          status: order.status,
+          stage: order.stage,
+        });
+        stepperContext.next();
+      } catch (error) {
+        alert(error?.response?.data || error);
+      }
     },
   });
   return (
