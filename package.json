@@ -1,7 +1,7 @@
 {
   "name": "@craynetwork/react-pay",
   "type": "module",
-  "version": "3.0.4",
+  "version": "3.0.6",
   "description": "One click seamless crypto payments",
   "main": "dist/src/cray-widget/index.js",
   "module": "dist/src/cray-widget/index.es.js",
