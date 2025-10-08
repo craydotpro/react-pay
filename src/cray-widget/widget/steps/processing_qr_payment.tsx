@@ -7,10 +7,10 @@ const QRProcessingPayment = () => {
       </div>
       <div className="p-8 flex flex-col gap-2">
         <span className="text-center text-[28px] font-bold">
-          "Processing your payment"
+          Processing your payment
         </span>
         <span className="cray-label-lg font-medium text-slate-600 text-center">
-          "Hang tight - this will only take a moment."
+          Hang tight - this will only take a moment.
         </span>
       </div>
     </div>

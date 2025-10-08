@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { IOrderAllocation } from "../../../interfaces";
-import { ChevronDown, Divide } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useAppStore } from "../../../cray-widget/store";
 import Coins from "../../../components/ui/coins";
 import BalanceChip from "../../../components/ui/balance_chip";
@@ -67,7 +67,7 @@ const PaymentSuccess = () => {
           <div className="w-full h-12"></div>
         )}
         <div className="px-5 pb-5 flex items-center justify-center">
-          <Button onClick={() => reset}>Close</Button>
+          <Button onClick={() => reset()}>Close</Button>
         </div>
       </div>
     </div>
