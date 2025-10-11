@@ -1,7 +1,7 @@
 {
   "name": "@craynetwork/react-pay",
   "type": "module",
-  "version": "3.0.4",
+  "version": "3.0.9",
   "description": "One click seamless crypto payments",
   "main": "dist/src/cray-widget/index.js",
   "module": "dist/src/cray-widget/index.es.js",
@@ -53,6 +53,7 @@
     "copy-to-clipboard": "^3.3.3",
     "lucide-react": "^0.544.0",
     "postcss": "^8.4.14",
+    "qrcode.react": "^4.2.0",
     "react-shadow": "^20.6.0",
     "redaxios": "^0.5.1",
     "rollup-plugin-dotenv": "^0.5.1",

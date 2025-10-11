@@ -24,13 +24,7 @@ const CrayPayButton = ({
   onPaymentRejected?: (params: IOrder) => any;
   children?: ReactElement;
 }) => {
-  const {
-    destinationToken,
-    destinationAddress,
-    destinationChain,
-    amount,
-    action,
-  } = payload;
+  const { destinationAddress, destinationChain, amount, action } = payload;
   const updatedAction = useMemo(() => {
     if (action) {
       let serializedAction = JSON.stringify(action);
@@ -48,7 +42,6 @@ const CrayPayButton = ({
         <PayWidget
           payload={{
             amount,
-            destinationToken,
             destinationAddress,
             orderType: "dapp",
             destinationChain,

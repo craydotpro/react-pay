@@ -4,6 +4,8 @@ import { ENV } from "../env";
 class PaymentService {
   CreateOrder = async (payload: any) =>
     (await xhr.post("/orders", payload)).data;
+  CreateQROrder = async (payload: any) =>
+    (await xhr.post("/orders/qr-order", payload)).data;
   SubmitOrder = async (orderId: string, payload: any) =>
     (await xhr.post(`/orders/${orderId}`, payload)).data;
   ListenStatus = (orderId: string) =>

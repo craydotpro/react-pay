@@ -1,12 +1,20 @@
-import { useAppKit } from "@reown/appkit/react";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import { useAppStore } from "../store";
 import { _sleep } from "../../utils";
 import { Button } from "../../components/ui/button";
 
 const ConnectWallet = () => {
   const payload = useAppStore((state) => state.payload);
-  const { open } = useAppKit();
+  const setPaymentMethod = useAppStore((state) => state.setPaymentMethod);
+  const { isConnected } = useAppKitAccount();
 
+  const { open } = useAppKit();
+  const proceedWithQR = () => setPaymentMethod("QR");
+  console.log({ isConnected });
+  const proceedWithWallet = () => {
+    if (!isConnected) open();
+    setPaymentMethod("WALLET");
+  };
   return (
     <div className=" flex flex-col h-full">
       <div className="flex items-center justify-center bg-[#F8F9FC] h-1/2 gap-4 py-[66px]">
@@ -30,7 +38,7 @@ const ConnectWallet = () => {
         </svg>
         <div className="w-[88px] h-[88px] border-[1.22px] border-[#EAECF0] rounded-[14.67px] p-[4.89px] shadow-[0px_1.98px_4.89px_0px_#1D29390D] bg-white">
           <div className="w-full h-full border-[1.22px] border-[#EAECF0] rounded-[10px] flex items-center justify-center ">
-            <img src="https://pay.cray.network/logo.svg" />
+            <img src="https://app.cray.pro/cray-logo.png" />
           </div>
         </div>
       </div>
@@ -43,7 +51,13 @@ const ConnectWallet = () => {
             Connect the wallet you want to pay from
           </p>
         </div>
-        <Button onClick={() => open()}>Continue with Wallet</Button>
+        <Button onClick={proceedWithWallet}>Continue with Wallet</Button>
+        <div className="flex items-center w-full my-4">
+          <hr className="w-full " />
+          <p className="px-3 ">OR</p>
+          <hr className="w-full " />
+        </div>
+        <Button onClick={proceedWithQR}>Scan QR Code</Button>
       </div>
     </div>
   );

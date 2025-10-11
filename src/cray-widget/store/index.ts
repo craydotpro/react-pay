@@ -11,6 +11,7 @@ import { CHAINS } from "../../config/chains";
 import { mainnet } from "viem/chains";
 
 interface IAppStore {
+  payment_method: "QR" | "WALLET" | null;
   apikey: string | null;
   testnet: boolean;
   status: OrderStatus | null;
@@ -34,9 +35,11 @@ interface IAppStore {
     onPaymentFailed?: (params: IOrder) => any;
     onPaymentRejected?: (params: IOrder) => any;
   };
+  setPaymentMethod: (setPaymentMethod) => any;
   setCallBacks: Function;
 }
 const initialState = {
+  payment_method: null,
   apikey: null,
   testnet: false,
   status: null,
@@ -81,7 +84,9 @@ export const useAppStore = create<IAppStore>((set, get) => ({
       },
     });
   },
+
   setCallBacks: (callBacks: IAppStore["callBacks"]) =>
     set({ ...get().callBacks, callBacks }),
+  setPaymentMethod: (payment_method) => set({ payment_method }),
   reset: () => set({ ...initialState }),
 }));
