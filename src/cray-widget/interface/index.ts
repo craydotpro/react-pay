@@ -7,7 +7,6 @@ export interface IOrder {
   status: string;
   amount: string;
   subOrders?: any[];
-  destinationToken: string;
   destinationChain: number;
   orderData: string;
 }
@@ -23,7 +22,6 @@ export interface ICrayPayload {
   amount: string;
   testnet?: boolean;
   destinationChain: number;
-  destinationToken?: string;
   destinationAddress: string;
   orderType?: string;
   action?: ICrayActionPayload;
