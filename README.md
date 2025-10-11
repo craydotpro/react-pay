@@ -44,7 +44,6 @@ const PaymentComponent = () => {
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
         onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
-          destinationToken: "0xTokenAddress",
           destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
@@ -68,7 +67,6 @@ It accepts These arguments:
 - `testnet` (boolean, optional): Whether to use the testnet. Default is `false`.
 - `apiKey` (string): Your API key for authentication.
 - payload
-  - `destinationToken` (string): Token address of the token to be used for payment.
   - `destinationAddress` (string): The wallet address of the receiver.
   - `destinationChain` (number): The chain ID of the destination blockchain.
   - `amount` (string): The amount to be paid in USD.
@@ -85,10 +83,12 @@ An interface representing the SubOrder Schema:
 ```typescript
 enum SubOrder {
   type: "INPUT" | "OUTPUT";
-  sourceChain: number;
-  hash: string;
-  status: "PENDING" | "FULFILLED" | "FAILED";
+  amount: string;
+  chainId: number;
+  hash: strign;
+  status: "success" | "reverted";
   gasUsed: number;
+  gasPrice: number;
 }
 ```
 
@@ -98,11 +98,25 @@ An enum representing the possible payment statuses:
 
 ```typescript
 enum OrderStatus {
+  INITIALIZED = "Initialized",
+  PROCESSING = "Processing",
+  COMPLETED = "Completed",
+  FAILED = "Failed",
+  CANCELLED = "Cancelled",
+}
+```
+
+### `OrderStage`
+
+An enum representing the possible payment stages:
+
+```typescript
+enum OrderStage {
   INITIALIZED = "INITIALIZED",
   SIGNED = "SIGNED",
   DECLINED = "DECLINED",
-  ASSIGNED = "ASSIGNED",
   CREATED = "CREATED",
+  ASSIGNED = "ASSIGNED",
   CREATED_FAILED = "CREATED_FAILED",
   FULFILLED = "FULFILLED",
   FULFILLED_FAILED = "FULFILLED_FAILED",
@@ -122,6 +136,7 @@ interface IPaymentRes {
   id: string; // alias of _id
   destinationAddress: string;
   senderAddress: string;
+  receiverAddress: string;
   destinationChain: number;
   destinationToken: string;
   amount: string;
@@ -164,7 +179,6 @@ const PaymentComponent = () => {
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
         onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
-          destinationToken: "0xTokenAddress",
           destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
@@ -193,7 +207,6 @@ const PaymentComponent = () => {
         onPaymentFailed={(e) => console.log("paymentFailed", e)}
         onPaymentRejected={(e) => console.log("paymentRejected", e)}
         payload={{
-          destinationToken: "0xTokenAddress",
           destinationAddress: "0xdestinationAddress",
           destinationChain: 1,
           amount: "100",
